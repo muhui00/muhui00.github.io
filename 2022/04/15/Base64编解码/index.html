@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="muhui">
+    
+    <title>
+        
+            Base64编解码 |
+        
+        Rain Water
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/dog.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.jpg","favicon":"/images/dog.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"To strive, to seek, to find, and not to yield."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Rain Water
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Base64编解码</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">muhui</span>
+                        
+                            <span class="author-label">Lv1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-04-15 20:53:05</span>
+        <span class="mobile">2022-04-15 20:53</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Base64/">Base64</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.3k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>5 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="Base64编解码"><a href="#Base64编解码" class="headerlink" title="Base64编解码"></a>Base64编解码</h1><h2 id="1、应用目的"><a href="#1、应用目的" class="headerlink" title="1、应用目的"></a>1、应用目的</h2><p>在计算机中任何数据都是按ascii码存储的，而ascii码的128～255之间的值是不可见字符。将数据先做一个Base64编码，统统变成可见字符，在多设备数据传输的过程中，可以降低数据出错的可能性。</p>
+<h2 id="2、解决问题"><a href="#2、解决问题" class="headerlink" title="2、解决问题"></a>2、解决问题</h2><ul>
+<li>使用Base64可以解决客户端与服务器数据传输中文本乱码问题</li>
+<li>解决编解码过程中，由于传输数据过程中数据转化为二进制导致文本数据长度改变，导致签名过程中<code>RSA_verify</code>函数出现段错误。</li>
+</ul>
+<p>	</p>
+<figure class="highlight plaintext"><figcaption><span>RSA_verify(int type, const unsigned char *m, unsigned int m_length,</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const unsigned char *sigbuf, unsigned int siglen, RSA *rsa);</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、算法原理"><a href="#3、算法原理" class="headerlink" title="3、算法原理"></a>3、算法原理</h2><ul>
+<li>把3个8位字节（3*8&#x3D;24）转化为4个6位的字节（4*6&#x3D;24）<ul>
+<li>假设有一个字符串, 需要对这个字符串分组, 每3个字节为一组, 分成N组</li>
+<li>将每一组的3个字节拆分, 拆成4个字节, 每个字节有6bit</li>
+</ul>
+</li>
+<li>在6位的前面补两个0，形成8位一个字节的形式<ul>
+<li>每个组就从3个字节变成了4个字节</li>
+<li>结论: base64编码之后的字符串变大了,</li>
+</ul>
+</li>
+<li>如果剩下的字符不足3个字节，则用0填充，输出字符使用’&#x3D;’，因此编码后输出的文本末尾可能会出现1或2个’&#x3D;’, 表示补了多少字节，解码的时候，会自动去掉。</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/572f59d2fc3a43cbba6f94e30ae07890.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/fbb657013ef94e99a618795c79509dc3.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="4、openssl-中base64的使用"><a href="#4、openssl-中base64的使用" class="headerlink" title="4、openssl 中base64的使用"></a>4、openssl 中base64的使用</h2><p>OpenSSL中文手册之BIO库详解: 	<a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/liao20081228/article/details/77193729" >https://blog.csdn.net/liao20081228/article/details/77193729<i class="fas fa-external-link-alt"></i></a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建BIO对象</span></span><br><span class="line">BIO *<span class="title function_">BIO_new</span><span class="params">(<span class="type">const</span> BIO_METHOD *type)</span>;</span><br><span class="line"><span class="comment">// 封装了base64编码方法的BIO,写的时候进行编码，读的时候解码</span></span><br><span class="line">BIO_METHOD* <span class="title function_">BIO_f_base64</span><span class="params">()</span>;</span><br><span class="line"><span class="comment">// 封装了内存操作的BIO接口，包括了对内存的读写操作</span></span><br><span class="line">BIO_METHOD* <span class="title function_">BIO_s_mem</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个内存型的BIO对象</span></span><br><span class="line"><span class="comment">// BIO * bio = BIO_new(BIO_s_mem());</span></span><br><span class="line">BIO *<span class="title function_">BIO_new_mem_buf</span><span class="params">(<span class="type">void</span> *buf, <span class="type">int</span> len)</span>;</span><br><span class="line"><span class="comment">// 创建一个磁盘文件操作的BIO对象</span></span><br><span class="line">BIO* <span class="title function_">BIO_new_file</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* filename, <span class="type">const</span> <span class="type">char</span>* mode)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从BIO接口中读出len字节的数据到buf中。</span></span><br><span class="line"><span class="comment">// 成功就返回真正读出的数据的长度，失败返回0或－1，如果该BIO没有实现本函数则返回－2。</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">BIO_read</span><span class="params">(BIO *b, <span class="type">void</span> *buf, <span class="type">int</span> len)</span>;</span><br><span class="line">	- buf: 存储数据的缓冲区地址</span><br><span class="line">	- len: buf的最大容量</span><br><span class="line"><span class="comment">// 往BIO中写入长度为len的数据。</span></span><br><span class="line"><span class="comment">// 成功返回真正写入的数据的长度，失败返回0或－1，如果该BIO没有实现本函数则返回－2。</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">BIO_write</span><span class="params">(BIO *b, <span class="type">const</span> <span class="type">void</span> *buf, <span class="type">int</span> len)</span>;</span><br><span class="line">	- buf: 要写入的数据, 写入到b对应的设备(内存/磁盘文件)中</span><br><span class="line">	- len: 要写入的数据的长度</span><br><span class="line"><span class="comment">// 将BIO内部缓冲区的数据都写出去, 成功: 1, 失败: 0或-1</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">BIO_flush</span><span class="params">(BIO *b)</span>;</span><br><span class="line">	- 在使用BIO_write()进行写操作的时候, 数据有时候在openssl提供的缓存中</span><br><span class="line">	- 将openssl提供的缓存中的数据刷到设备(内存/磁盘文件)中</span><br><span class="line"></span><br><span class="line"><span class="comment">// 把参数中名为append的BIO附加到名为b的BIO上，并返回b</span></span><br><span class="line"><span class="comment">// 连接两个bio对象到链表中</span></span><br><span class="line"><span class="comment">// 在链表中的关系: b-&gt;append</span></span><br><span class="line">BIO * <span class="title function_">BIO_push</span><span class="params">(BIO *b, BIO *append)</span>;</span><br><span class="line">	- b: 要插入到链表中的头结点</span><br><span class="line">	- append: 头结点的后继</span><br><span class="line"><span class="comment">// 把名为b的BIO从一个BIO链中移除并返回下一个BIO，如果没有下一个BIO，那么就返回NULL。</span></span><br><span class="line">BIO * <span class="title function_">BIO_pop</span><span class="params">(BIO *b)</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">buf_mem_st</span> <span class="title">BUF_MEM</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">buf_mem_st</span> &#123;</span></span><br><span class="line">    <span class="type">size_t</span> length;              <span class="comment">/* current number of bytes */</span></span><br><span class="line">    <span class="type">char</span> *data;</span><br><span class="line">    <span class="type">size_t</span> max;                 <span class="comment">/* size of buffer */</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">long</span> flags;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 该函数也是一个宏定义函数，它将b底层的BUF_MEM结构放在指针pp中。</span></span><br><span class="line">BUF_MEM* ptr;</span><br><span class="line"><span class="type">long</span> <span class="title function_">BIO_get_mem_ptr</span><span class="params">(BIO *b, BUF_MEM **pp)</span>;</span><br><span class="line"><span class="comment">// 释放整个bio链</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">BIO_free_all</span><span class="params">(BIO *a)</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong><code>BIO</code>内部维护了一条双向链表</strong>，这使得构造好一个<code>BIO</code>链表之后，具体的业务操作会变的非常方便，整个<code>BIO</code>链会自动将数据进行指定操作的系列处理。</p>
+<p><strong>下图描述了一条读写的<code>BIO</code>链。</strong><br><img src="https://img-blog.csdnimg.cn/4b4a4ee250c940bf841e6313f1dbc058.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAbXVodWnjgILjgII=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="5、-BIO链的写操作"><a href="#5、-BIO链的写操作" class="headerlink" title="5、 BIO链的写操作"></a>5、 <code>BIO</code>链的写操作</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span>* data = <span class="string">&quot;hello, world&quot;</span>;</span><br><span class="line"><span class="comment">// 创建base64编码的bio对象</span></span><br><span class="line">BIO* b64 = BIO_new(BIO_f_base64());</span><br><span class="line"><span class="comment">// 最终在内存中得到一个base64编码之后的字符串</span></span><br><span class="line">BIO* mem = BIO_new(BIO_s_mem());</span><br><span class="line"><span class="comment">// 将两个bio对象串联, 结构: b64-&gt;mem</span></span><br><span class="line">BIO_push(b64, mem);</span><br><span class="line"><span class="comment">// 将要编码的数据写入到bio对象中</span></span><br><span class="line">BIO_write(b64, data, <span class="built_in">strlen</span>(data)+<span class="number">1</span>);</span><br><span class="line"><span class="comment">// 将数据从bio对象对应的内存中取出 -&gt; char*</span></span><br><span class="line">BUF_MEM* ptr;</span><br><span class="line"><span class="comment">// 数据通过ptr指针传出</span></span><br><span class="line"><span class="type">long</span> <span class="title function_">BIO_get_mem_ptr</span><span class="params">(b64, &amp;ptr)</span>;</span><br><span class="line"><span class="type">char</span>* buf = new <span class="type">char</span>[ptr-&gt;length];</span><br><span class="line"><span class="built_in">memcpy</span>(buf, ptr-&gt;data, ptr-&gt;length);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;编码之后的数据: %s\n&quot;</span>, buf);</span><br></pre></td></tr></table></figure>
+
+<h2 id="6、-BIO链的读操作"><a href="#6、-BIO链的读操作" class="headerlink" title="6、 BIO链的读操作"></a>6、 <code>BIO</code>链的读操作</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 要解码的数据</span></span><br><span class="line"><span class="type">char</span>* data = <span class="string">&quot;xxxxxxxxxxxxxxxxxxxx&quot;</span>;</span><br><span class="line"><span class="comment">// 创建base64解码的bio对象</span></span><br><span class="line">BIO* b64 = BIO_new(BIO_f_base64());</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> 0</span></span><br><span class="line"><span class="comment">// 存储要解码的数据</span></span><br><span class="line">BIO* mem = BIO_new(BIO_s_mem());</span><br><span class="line"><span class="comment">// 将数据写入到mem对应的内存中</span></span><br><span class="line">BIO_write(mem, data, <span class="built_in">strlen</span>(data));</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">BIO *mem = BIO_new_mem_buf(data, <span class="built_in">strlen</span>(data));</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 组织bio链</span></span><br><span class="line">BIO_push(b64, mem);</span><br><span class="line"><span class="comment">// 读数据</span></span><br><span class="line"><span class="type">char</span> buf[<span class="number">1024</span>];</span><br><span class="line"><span class="type">int</span> <span class="title function_">BIO_read</span><span class="params">(b64, buf, <span class="number">1024</span>)</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;base64解码的数据: %s\n&quot;</span>, buf);</span><br></pre></td></tr></table></figure>
+
+<h2 id="7、总结"><a href="#7、总结" class="headerlink" title="7、总结"></a>7、总结</h2><ul>
+<li>Base64编解码可以有效的降低数据传输中出错的可能性</li>
+<li>Base64编解码可以解决数据传输过程中，数据长度发生变化，导致<code>Openssl</code>库中的接口<code>API</code>报错的情况（作为函数参数传递）。</li>
+<li><code>BIO</code>内部维护了一条双向链表，构造好一套<code>BIO</code>链之后，指定头节点后，<code>BIO</code>链会自动将数据进行指定操作的系列处理。</li>
+<li>封装Base64思想编解码（待续）。</li>
+</ul>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：Base64编解码</li>
+        <li>Post author：muhui</li>
+        <li>Create time：2022-04-15 20:53:05</li>
+        <li>
+            Post link：https://muhui00.github.io/2022/04/15/Base64编解码/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/Base64/">#Base64</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/04/15/Protobuf%E6%95%B0%E6%8D%AE%E5%BA%8F%E5%88%97%E5%8C%96/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Protobuf数据序列化</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'Eeqga2a21x1lTk31OIr0iG8A-gzGzoHsz',
+                    appKey: 'ssPNIlbhlyppEYn9Gc1WOcjA',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😘😘😘 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'muhui';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">muhui</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Base64%E7%BC%96%E8%A7%A3%E7%A0%81"><span class="nav-text">Base64编解码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%BA%94%E7%94%A8%E7%9B%AE%E7%9A%84"><span class="nav-text">1、应用目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98"><span class="nav-text">2、解决问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86"><span class="nav-text">3、算法原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81openssl-%E4%B8%ADbase64%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-text">4、openssl 中base64的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81-BIO%E9%93%BE%E7%9A%84%E5%86%99%E6%93%8D%E4%BD%9C"><span class="nav-text">5、 BIO链的写操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81-BIO%E9%93%BE%E7%9A%84%E8%AF%BB%E6%93%8D%E4%BD%9C"><span class="nav-text">6、 BIO链的读操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-text">7、总结</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
