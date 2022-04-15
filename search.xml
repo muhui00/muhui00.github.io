@@ -5,7 +5,7 @@
     <url>/2022/04/15/Base64%E7%BC%96%E8%A7%A3%E7%A0%81/</url>
     <content><![CDATA[<h1 id="Base64编解码"><a href="#Base64编解码" class="headerlink" title="Base64编解码"></a>Base64编解码</h1><h2 id="1、应用目的"><a href="#1、应用目的" class="headerlink" title="1、应用目的"></a>1、应用目的</h2><p>在计算机中任何数据都是按ascii码存储的，而ascii码的128～255之间的值是不可见字符。将数据先做一个Base64编码，统统变成可见字符，在多设备数据传输的过程中，可以降低数据出错的可能性。</p>
 <h2 id="2、解决问题"><a href="#2、解决问题" class="headerlink" title="2、解决问题"></a>2、解决问题</h2><ul>
-<li>使用Base64可以解决客户端与服务器数据传输中文本乱码问题</li>
+<li>使用Base64可以解决客户端与服务器数据传输中文本乱码问题。</li>
 <li>解决编解码过程中，由于传输数据过程中数据转化为二进制导致文本数据长度改变，导致签名过程中<code>RSA_verify</code>函数出现段错误。</li>
 </ul>
 <p>	</p>
@@ -13,13 +13,13 @@
 
 <h2 id="3、算法原理"><a href="#3、算法原理" class="headerlink" title="3、算法原理"></a>3、算法原理</h2><ul>
 <li>把3个8位字节（3*8&#x3D;24）转化为4个6位的字节（4*6&#x3D;24）<ul>
-<li>假设有一个字符串, 需要对这个字符串分组, 每3个字节为一组, 分成N组</li>
-<li>将每一组的3个字节拆分, 拆成4个字节, 每个字节有6bit</li>
+<li>假设有一个字符串, 需要对这个字符串分组, 每3个字节为一组, 分成N组；</li>
+<li>将每一组的3个字节拆分, 拆成4个字节, 每个字节有6bit；</li>
 </ul>
 </li>
 <li>在6位的前面补两个0，形成8位一个字节的形式<ul>
-<li>每个组就从3个字节变成了4个字节</li>
-<li>结论: base64编码之后的字符串变大了,</li>
+<li>每个组就从3个字节变成了4个字节；</li>
+<li>结论: base64编码之后的字符串变大了,；</li>
 </ul>
 </li>
 <li>如果剩下的字符不足3个字节，则用0填充，输出字符使用’&#x3D;’，因此编码后输出的文本末尾可能会出现1或2个’&#x3D;’, 表示补了多少字节，解码的时候，会自动去掉。</li>
@@ -35,7 +35,7 @@
 <h2 id="6、-BIO链的读操作"><a href="#6、-BIO链的读操作" class="headerlink" title="6、 BIO链的读操作"></a>6、 <code>BIO</code>链的读操作</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 要解码的数据</span></span><br><span class="line"><span class="type">char</span>* data = <span class="string">&quot;xxxxxxxxxxxxxxxxxxxx&quot;</span>;</span><br><span class="line"><span class="comment">// 创建base64解码的bio对象</span></span><br><span class="line">BIO* b64 = BIO_new(BIO_f_base64());</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> 0</span></span><br><span class="line"><span class="comment">// 存储要解码的数据</span></span><br><span class="line">BIO* mem = BIO_new(BIO_s_mem());</span><br><span class="line"><span class="comment">// 将数据写入到mem对应的内存中</span></span><br><span class="line">BIO_write(mem, data, <span class="built_in">strlen</span>(data));</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">BIO *mem = BIO_new_mem_buf(data, <span class="built_in">strlen</span>(data));</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 组织bio链</span></span><br><span class="line">BIO_push(b64, mem);</span><br><span class="line"><span class="comment">// 读数据</span></span><br><span class="line"><span class="type">char</span> buf[<span class="number">1024</span>];</span><br><span class="line"><span class="type">int</span> <span class="title function_">BIO_read</span><span class="params">(b64, buf, <span class="number">1024</span>)</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;base64解码的数据: %s\n&quot;</span>, buf);</span><br></pre></td></tr></table></figure>
 
 <h2 id="7、总结"><a href="#7、总结" class="headerlink" title="7、总结"></a>7、总结</h2><ul>
-<li>Base64编解码可以有效的降低数据传输中出错的可能性</li>
+<li>Base64编解码可以有效的降低数据传输中出错的可能性。</li>
 <li>Base64编解码可以解决数据传输过程中，数据长度发生变化，导致<code>Openssl</code>库中的接口<code>API</code>报错的情况（作为函数参数传递）。</li>
 <li><code>BIO</code>内部维护了一条双向链表，构造好一套<code>BIO</code>链之后，指定头节点后，<code>BIO</code>链会自动将数据进行指定操作的系列处理。</li>
 <li>封装Base64思想编解码（待续）。</li>
