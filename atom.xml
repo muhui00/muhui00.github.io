@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-04-15T15:54:26.274Z</updated>
+  <updated>2022-04-19T09:30:47.537Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Protobuf报错修正</title>
+    <link href="http://example.com/2022/04/19/Protobuf%E6%8A%A5%E9%94%99%E4%BF%AE%E6%AD%A3/"/>
+    <id>http://example.com/2022/04/19/Protobuf%E6%8A%A5%E9%94%99%E4%BF%AE%E6%AD%A3/</id>
+    <published>2022-04-19T08:51:27.000Z</published>
+    <updated>2022-04-19T09:30:47.537Z</updated>
+    
+    <content type="html"><![CDATA[<p>​今天在VS使用Linux远程编译项目代码的时候，Linux编译报错，查看错误提示发现是提示Linux下Protobuf版本有问题。</p><p>​查看windows下的Protobuf的版本为 <code>libprotoc 3.8.0</code>；</p><p>​查看Linux下的Protobuf的版本为 <code>libprotoc 3.13.0</code>；</p><p>​我是在windows下编译<code>.proto</code>文件生成的<code>C++</code>类，版本低于Linux下的环境，导致编译的时候版本不兼容。</p><p>解决办法</p><ol><li>​更新windows下的Protubuf版本与Linux下的一致，重新编译<code>.proto</code>文件，并且替换项目中的<code>C++</code>类。</li><li>​将Linux下的Protobuf版本替换为window下的版本，直接编译项目即可。</li></ol><p>我是替换的Linux下的Protobuf版本。</p><h4 id="Linux下Protobuf替换版本的步骤"><a href="#Linux下Protobuf替换版本的步骤" class="headerlink" title="Linux下Protobuf替换版本的步骤"></a>Linux下Protobuf替换版本的步骤</h4><ol><li>​卸载</li></ol><p>​<code>sudo apt-get remove libprotobuf-dev</code></p><ol start="2"><li>​删除路径</li></ol><p>​<code>which protoc</code>查看路径，然后将其删除即可。</p><ol start="3"><li>​安装</li></ol><ul><li><p>下载源码安装包: <code>protobuf-cpp-3.8.0.tar.gz</code></p></li><li><p>解压缩</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">tar zxvf protobuf-cpp-3.8.0.tar.gz</span></span><br></pre></td></tr></table></figure></li><li><p>安装 -&gt; 进入到解压目录</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> protobuf-3.8.0</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./configure</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make check(可选)</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo make install</span></span><br></pre></td></tr></table></figure></li></ul><p>版本替换完成之后成功解决问题。<br><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/image.7bvx6pc5xb40.webp" alt="图片"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;​	今天在VS使用Linux远程编译项目代码的时候，Linux编译报错，查看错误提示发现是提示Linux下Protobuf版本有问题。&lt;/p&gt;
+&lt;p&gt;​	查看windows下的Protobuf的版本为 &lt;code&gt;libprotoc 3.8.0&lt;/code&gt;；&lt;/p&gt;
+&lt;p</summary>
+      
+    
+    
+    
+    
+    <category term="Protobuf" scheme="http://example.com/tags/Protobuf/"/>
+    
+  </entry>
   
   <entry>
     <title>Base64编解码</title>
