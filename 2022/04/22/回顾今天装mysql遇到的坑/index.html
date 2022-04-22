@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="muhui">
+    
+    <title>
+        
+            回顾今天装mysql遇到的坑 |
+        
+        muhui&#39;s blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/dog.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.jpg","favicon":"/images/dog.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"To strive, to seek, to find, and not to yield."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                muhui&#39;s blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">回顾今天装mysql遇到的坑</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">muhui</span>
+                        
+                            <span class="author-label">Lv1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-04-22 23:18:49</span>
+        <span class="mobile">2022-04-22 23:18</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/mysql/">mysql</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>4 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>​	由于前段时间不小心把系统搞坏了，导致原来装的环境全部都无了，难受😣😣😣😣。今天重新装了一下Mysql，可是没想到遇到那么多坑，浪费了大半天，特此总结一下，记录愚蠢的一天😑😑。</p>
+<p>​	就从安装开始说把，后面再总结一下遇到的错误ಠ_ಠ。</p>
+<h3 id="一、Mysql-5-8-的安装（在线-离线）"><a href="#一、Mysql-5-8-的安装（在线-离线）" class="headerlink" title="一、Mysql 5.8 的安装（在线|离线）"></a>一、Mysql 5.8 的安装（在线|离线）</h3><h4 id="1、在线安装"><a href="#1、在线安装" class="headerlink" title="1、在线安装"></a>1、在线安装</h4><p>终端执行命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~ &gt; sudo apt-get install mysql-server -y      # 此步会提示设置mysql密码</span><br><span class="line">~ &gt; sudo apt install mysql-client  -y</span><br><span class="line">~ &gt; sudo apt install libmysqlclient-dev -y</span><br></pre></td></tr></table></figure>
+
+<p>查看安装是否成功</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~ &gt; sudo netstat -tap | grep mysql</span><br><span class="line">tcp        0      0 localhost:mysql         0.0.0.0:*               LISTEN      3847/mysqld #成功</span><br></pre></td></tr></table></figure>
+
+<p>建议在线安装，非常简单，也可以用Docker来部署。</p>
+<h4 id="2、离线安装"><a href="#2、离线安装" class="headerlink" title="2、离线安装"></a>2、离线安装</h4><p>这个就比较麻烦了😣😣。</p>
+<h5 id="（1）下载安装包"><a href="#（1）下载安装包" class="headerlink" title="（1）下载安装包"></a>（1）下载安装包</h5><p> 官网下载mysql：<a class="link"   target="_blank" rel="noopener" href="https://dev.mysql.com/downloads/mysql/" >https://dev.mysql.com/downloads/mysql/<i class="fas fa-external-link-alt"></i></a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/1650641945(1).4rsjgavsdgg0.webp" alt="tupian"></p>
+<h5 id="（2）解压"><a href="#（2）解压" class="headerlink" title="（2）解压"></a>（2）解压</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xf mysql-server_8.0.28-2ubuntu20.04_amd64.deb-bundle.tar</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/image.2ewwnczvpusk.webp" alt="图片"></p>
+<h5 id="3-安装"><a href="#3-安装" class="headerlink" title="(3) 安装"></a>(3) 安装</h5><p>注意安装时依赖是有先后顺序的，需要依次安装。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">~ &gt; sudo dpkg -i mysql-community-client-core_8.0.28-2ubuntu20.04_amd64.deb</span><br><span class="line">~ &gt; sudo dpkg -i mysql-common_8.0.28-2ubuntu20.04_amd64.deb</span><br><span class="line">~ &gt; sudo dpkg -i mysql-community-client_8.0.28-2ubuntu20.04_amd64.deb</span><br><span class="line">~ &gt; sudo dpkg -i libmysqlclient21_8.0.28-2ubuntu20.04_amd64.deb</span><br><span class="line">~ &gt; sudo dpkg -i libmysqlclient-dev_8.0.28-2ubuntu20.04_amd64.deb</span><br><span class="line">~ &gt; sudo dpkg -i mysql-client_8.0.28-2ubuntu20.04_amd64.deb</span><br><span class="line">~ &gt; sudo dpkg -i mysql-community-server-core_8.0.20-2ubuntu20.04_amd64.deb</span><br><span class="line">~ &gt; sudo dpkg -i mysql-community-server_8.0.28-2ubuntu20.04_amd64.deb #此命令执行后会弹出窗口让你设置MySQL密码，设置完成后选择5.X的加密方式</span><br><span class="line">~ &gt; sudo dpkg -i mysql-server_8.0.28-2ubuntu20.04_amd64.deb</span><br></pre></td></tr></table></figure>
+
+<p>可能会提示缺失 <code>libaio1</code>和<code>libmecab2</code>包，使用命令安装即可。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~ &gt; sudo apt-get install libaio1</span><br><span class="line">~ &gt; sudo apt-get install libmecab2</span><br></pre></td></tr></table></figure>
+
+<p>缺啥补啥😑😑。</p>
+<h3 id="二、Mysql的使用"><a href="#二、Mysql的使用" class="headerlink" title="二、Mysql的使用"></a>二、Mysql的使用</h3><h4 id="1、启动Mysql"><a href="#1、启动Mysql" class="headerlink" title="1、启动Mysql"></a>1、启动Mysql</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~ &gt; sudo /etc/init.d/mysql start </span><br><span class="line">~ &gt; sudo service mysql start # 两种方式都可以</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、停止Mysql"><a href="#2、停止Mysql" class="headerlink" title="2、停止Mysql"></a>2、停止Mysql</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~ &gt; sudo /etc/init.d/mysql stop</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">或者</span></span><br><span class="line">~ &gt; sudo service mysql stop</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、重启Mysql"><a href="#3、重启Mysql" class="headerlink" title="3、重启Mysql"></a>3、重启Mysql</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~ &gt; sudo/etc/init.d/mysql restart</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">或者</span></span><br><span class="line">~ &gt; sudo service mysql restart</span><br></pre></td></tr></table></figure>
+
+<h4 id="4、设置用户名和密码（安装过程中如果设置了可以跳过）"><a href="#4、设置用户名和密码（安装过程中如果设置了可以跳过）" class="headerlink" title="4、设置用户名和密码（安装过程中如果设置了可以跳过）"></a>4、设置用户名和密码（安装过程中如果设置了可以跳过）</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~ &gt; sudo cat /etc/mysql/debian.cnf #查看系统默认的账号和密码</span><br><span class="line">~ &gt; mysql -u默认用户名 -p默认密码 # 登录Mysql</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、重置用户名和密码"><a href="#5、重置用户名和密码" class="headerlink" title="5、重置用户名和密码"></a>5、重置用户名和密码</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">mysql&gt; </span><span class="language-bash">use mysql;</span></span><br><span class="line"><span class="meta prompt_">mysql&gt; </span><span class="language-bash">update mysql.user <span class="built_in">set</span> authentication_string=password(<span class="string">&#x27;123456&#x27;</span>) <span class="built_in">where</span> user=<span class="string">&#x27;root&#x27;</span> and Host =<span class="string">&#x27;localhost&#x27;</span>;</span> </span><br><span class="line"><span class="meta prompt_">mysql&gt; </span><span class="language-bash">update user <span class="built_in">set</span>  plugin=<span class="string">&quot;mysql_native_password&quot;</span>;</span>     </span><br><span class="line"><span class="meta prompt_">mysql&gt; </span><span class="language-bash">flush privileges;</span>      </span><br><span class="line"><span class="meta prompt_">mysql&gt; </span><span class="language-bash">quit;</span>     </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">mysql80设置密码</span></span><br><span class="line"><span class="meta prompt_">mysql&gt; </span><span class="language-bash">use mysql;</span>    </span><br><span class="line"><span class="meta prompt_">mysql&gt; </span><span class="language-bash">alter user <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> identified with mysql_native_password by <span class="string">&#x27;123456&#x27;</span>;</span>   </span><br><span class="line"><span class="meta prompt_">mysql&gt; </span><span class="language-bash">flush privileges;</span> </span><br></pre></td></tr></table></figure>
+
+<h3 id="三、报错处理"><a href="#三、报错处理" class="headerlink" title="三、报错处理"></a>三、报错处理</h3><p>连接数据库，启动时报错。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/image.1cemrbvyybds.webp" alt="tupian"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~ &gt; mysql -u root -p #使用账户名和密码登录</span><br></pre></td></tr></table></figure>
+
+<p>启动时警告。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/image.6kfxmhtp8og0.webp" alt="tupian"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">第一个警告</span></span><br><span class="line">~ &gt; sudo touch /lib/apparmor/profile-load #创建文件</span><br><span class="line">~ &gt; chmod 777 /lib/apparmor/profile-load #给文件赋予权限</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">第二个警告，这种错误一般是 mysql 服务器异常关机导致的</span></span><br><span class="line">~ &gt; sudo service mysql stop</span><br><span class="line">~ &gt; sudo usermod -d /var/lib/mysql/ mysql</span><br><span class="line">~ &gt; sudo service mysql start</span><br></pre></td></tr></table></figure>
+
+<p>今天遇到的唯一的一个坑，但是却浪费了我大半天，弄到最后才发现是有两个配置文件改错了。</p>
+<p>遇到<code>zsh:command not fu=ound:mysql</code>的错误时，千万不要用<a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/sashuishui/p/14774355.html%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%8C%E5%9D%91%E4%BA%BA%E4%B8%8D%E6%B5%85%EF%BC%8C%E8%BF%99%E4%BC%9A%E5%AF%BC%E8%87%B4%E8%BE%93%E5%85%A5mysql%E6%8A%A5%E9%94%99%EF%BC%8C%E4%BD%86%E6%98%AF%E4%BD%A0%E8%BF%98%E6%89%BE%E4%B8%8D%E5%88%B0%E6%98%AF%E5%93%AA%E9%87%8C%E6%9C%89%E9%97%AE%E9%A2%98%EF%BC%8C%E8%87%AA%E9%97%AD%E4%BA%86%E5%8D%8A%E5%A4%A9%EF%BC%8C%E6%89%8D%E6%89%BE%E5%88%B0%E9%97%AE%E9%A2%98%EF%BC%88%E4%B8%BB%E8%A6%81%E4%B9%9F%E4%B8%8D%E6%98%AFLinux%E9%AB%98%E6%89%8B%EF%BC%89%EF%BC%8C%E4%B8%8D%E8%BF%87%E4%B9%9F%E5%AD%A6%E5%88%B0%E4%BA%86%E3%80%82" >https://www.cnblogs.com/sashuishui/p/14774355.html的方法，坑人不浅，这会导致输入mysql报错，但是你还找不到是哪里有问题，自闭了半天，才找到问题（主要也不是Linux高手），不过也学到了。<i class="fas fa-external-link-alt"></i></a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">vim ~/.bashrc</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">打开的文档中加入下面这句话</span></span><br><span class="line">alias 程序名 = 路径 # 可以让指定终端寻找程序入口的路径</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">保存并退出后执行下面命令</span></span><br><span class="line">source ~/.bashrc</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">若没有生效，则执行以下命令</span></span><br><span class="line">vim ~/.bash_profile</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在打开的文档中加入下面这句</span></span><br><span class="line">source ~/.bashrc</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">保存并退出后执行以下命令</span></span><br><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
+
+<h3 id="四、-彻底卸载Mysql"><a href="#四、-彻底卸载Mysql" class="headerlink" title="四、 彻底卸载Mysql"></a>四、 彻底卸载Mysql</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~ &gt; sudo apt-get autoremove mysql* --purge</span><br><span class="line">~ &gt; sudo apt-get remove apparmor</span><br><span class="line">~ &gt; dpkg -l |grep ^rc|awk &#x27;&#123;print $2&#125;&#x27; |sudo xargs dpkg -P # 清理残留数据</span><br><span class="line">~ &gt; dpkg --list|grep mysql # 查看依赖项</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>OKOK，就写到这里，累了累了，明天开始更新技术篇以及LeetCode，努力努力！！！🤖🤖🤖🤖🤖</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：回顾今天装mysql遇到的坑</li>
+        <li>Post author：muhui</li>
+        <li>Create time：2022-04-22 23:18:49</li>
+        <li>
+            Post link：https://muhui00.github.io/2022/04/22/回顾今天装mysql遇到的坑/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/mysql/">#mysql</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/04/19/Protobuf%E6%8A%A5%E9%94%99%E4%BF%AE%E6%AD%A3/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Protobuf报错修正</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div class="valine-container">
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+        <div id="vcomments"></div>
+        <script data-pjax>
+            function loadValine() {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'Eeqga2a21x1lTk31OIr0iG8A-gzGzoHsz',
+                    appKey: 'ssPNIlbhlyppEYn9Gc1WOcjA',
+                    meta: ['nick', 'mail', 'link'],
+                    avatar: 'wavatar',
+                    enableQQ: true,
+                    placeholder: '😘😘😘 尽情吐槽吧~',
+                    lang: 'en'.toLowerCase()
+                });
+
+                function getAuthor(language) {
+                    switch (language) {
+                        case 'en':
+                            return 'Author';
+                        case 'zh-CN':
+                            return '博主';
+                        default:
+                            return 'Master';
+                    }
+                }
+
+                // Add "Author" identify
+                const getValineDomTimer = setInterval(() => {
+                    const vcards = document.querySelectorAll('#vcomments .vcards .vcard');
+                    if (vcards.length > 0) {
+                        let author = 'muhui';
+
+                        if (author) {
+                            for (let vcard of vcards) {
+                                const vnick_dom = vcard.querySelector('.vhead .vnick');
+                                const vnick = vnick_dom.innerHTML;
+                                if (vnick === author) {
+                                    vnick_dom.innerHTML = `${vnick} <span class="author">${getAuthor(KEEP.hexo_config.language)}</span>`
+                                }
+                            }
+                        }
+                        clearInterval(getValineDomTimer);
+                    } else {
+                        clearInterval(getValineDomTimer);
+                    }
+                }, 2000);
+            }
+
+            if ('true') {
+                const loadValineTimeout = setTimeout(() => {
+                    loadValine();
+                    clearTimeout(loadValineTimeout);
+                }, 1000);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadValine);
+            }
+        </script>
+    </div>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">muhui</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81Mysql-5-8-%E7%9A%84%E5%AE%89%E8%A3%85%EF%BC%88%E5%9C%A8%E7%BA%BF-%E7%A6%BB%E7%BA%BF%EF%BC%89"><span class="nav-text">一、Mysql 5.8 的安装（在线|离线）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E5%9C%A8%E7%BA%BF%E5%AE%89%E8%A3%85"><span class="nav-text">1、在线安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85"><span class="nav-text">2、离线安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E5%8C%85"><span class="nav-text">（1）下载安装包</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E8%A7%A3%E5%8E%8B"><span class="nav-text">（2）解压</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E5%AE%89%E8%A3%85"><span class="nav-text">(3) 安装</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Mysql%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-text">二、Mysql的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E5%90%AF%E5%8A%A8Mysql"><span class="nav-text">1、启动Mysql</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E5%81%9C%E6%AD%A2Mysql"><span class="nav-text">2、停止Mysql</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E3%80%81%E9%87%8D%E5%90%AFMysql"><span class="nav-text">3、重启Mysql</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4%E3%80%81%E8%AE%BE%E7%BD%AE%E7%94%A8%E6%88%B7%E5%90%8D%E5%92%8C%E5%AF%86%E7%A0%81%EF%BC%88%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%A6%82%E6%9E%9C%E8%AE%BE%E7%BD%AE%E4%BA%86%E5%8F%AF%E4%BB%A5%E8%B7%B3%E8%BF%87%EF%BC%89"><span class="nav-text">4、设置用户名和密码（安装过程中如果设置了可以跳过）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5%E3%80%81%E9%87%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E5%90%8D%E5%92%8C%E5%AF%86%E7%A0%81"><span class="nav-text">5、重置用户名和密码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%86"><span class="nav-text">三、报错处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-%E5%BD%BB%E5%BA%95%E5%8D%B8%E8%BD%BDMysql"><span class="nav-text">四、 彻底卸载Mysql</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

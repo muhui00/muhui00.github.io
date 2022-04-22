@@ -234,4 +234,67 @@
         <tag>Protobuf</tag>
       </tags>
   </entry>
+  <entry>
+    <title>回顾今天装mysql遇到的坑</title>
+    <url>/2022/04/22/%E5%9B%9E%E9%A1%BE%E4%BB%8A%E5%A4%A9%E8%A3%85mysql%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/</url>
+    <content><![CDATA[<p>​	由于前段时间不小心把系统搞坏了，导致原来装的环境全部都无了，难受😣😣😣😣。今天重新装了一下Mysql，可是没想到遇到那么多坑，浪费了大半天，特此总结一下，记录愚蠢的一天😑😑。</p>
+<p>​	就从安装开始说把，后面再总结一下遇到的错误ಠ_ಠ。</p>
+<h3 id="一、Mysql-5-8-的安装（在线-离线）"><a href="#一、Mysql-5-8-的安装（在线-离线）" class="headerlink" title="一、Mysql 5.8 的安装（在线|离线）"></a>一、Mysql 5.8 的安装（在线|离线）</h3><h4 id="1、在线安装"><a href="#1、在线安装" class="headerlink" title="1、在线安装"></a>1、在线安装</h4><p>终端执行命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">~ &gt; sudo apt-get install mysql-server -y      # 此步会提示设置mysql密码</span><br><span class="line">~ &gt; sudo apt install mysql-client  -y</span><br><span class="line">~ &gt; sudo apt install libmysqlclient-dev -y</span><br></pre></td></tr></table></figure>
+
+<p>查看安装是否成功</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">~ &gt; sudo netstat -tap | grep mysql</span><br><span class="line">tcp        0      0 localhost:mysql         0.0.0.0:*               LISTEN      3847/mysqld #成功</span><br></pre></td></tr></table></figure>
+
+<p>建议在线安装，非常简单，也可以用Docker来部署。</p>
+<h4 id="2、离线安装"><a href="#2、离线安装" class="headerlink" title="2、离线安装"></a>2、离线安装</h4><p>这个就比较麻烦了😣😣。</p>
+<h5 id="（1）下载安装包"><a href="#（1）下载安装包" class="headerlink" title="（1）下载安装包"></a>（1）下载安装包</h5><p> 官网下载mysql：<a class="link"   href="https://dev.mysql.com/downloads/mysql/" >https://dev.mysql.com/downloads/mysql/<i class="fas fa-external-link-alt"></i></a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/1650641945(1).4rsjgavsdgg0.webp" alt="tupian"></p>
+<h5 id="（2）解压"><a href="#（2）解压" class="headerlink" title="（2）解压"></a>（2）解压</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -xf mysql-server_8.0.28-2ubuntu20.04_amd64.deb-bundle.tar</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/image.2ewwnczvpusk.webp" alt="图片"></p>
+<h5 id="3-安装"><a href="#3-安装" class="headerlink" title="(3) 安装"></a>(3) 安装</h5><p>注意安装时依赖是有先后顺序的，需要依次安装。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">~ &gt; sudo dpkg -i mysql-community-client-core_8.0.28-2ubuntu20.04_amd64.deb</span><br><span class="line">~ &gt; sudo dpkg -i mysql-common_8.0.28-2ubuntu20.04_amd64.deb</span><br><span class="line">~ &gt; sudo dpkg -i mysql-community-client_8.0.28-2ubuntu20.04_amd64.deb</span><br><span class="line">~ &gt; sudo dpkg -i libmysqlclient21_8.0.28-2ubuntu20.04_amd64.deb</span><br><span class="line">~ &gt; sudo dpkg -i libmysqlclient-dev_8.0.28-2ubuntu20.04_amd64.deb</span><br><span class="line">~ &gt; sudo dpkg -i mysql-client_8.0.28-2ubuntu20.04_amd64.deb</span><br><span class="line">~ &gt; sudo dpkg -i mysql-community-server-core_8.0.20-2ubuntu20.04_amd64.deb</span><br><span class="line">~ &gt; sudo dpkg -i mysql-community-server_8.0.28-2ubuntu20.04_amd64.deb #此命令执行后会弹出窗口让你设置MySQL密码，设置完成后选择5.X的加密方式</span><br><span class="line">~ &gt; sudo dpkg -i mysql-server_8.0.28-2ubuntu20.04_amd64.deb</span><br></pre></td></tr></table></figure>
+
+<p>可能会提示缺失 <code>libaio1</code>和<code>libmecab2</code>包，使用命令安装即可。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">~ &gt; sudo apt-get install libaio1</span><br><span class="line">~ &gt; sudo apt-get install libmecab2</span><br></pre></td></tr></table></figure>
+
+<p>缺啥补啥😑😑。</p>
+<h3 id="二、Mysql的使用"><a href="#二、Mysql的使用" class="headerlink" title="二、Mysql的使用"></a>二、Mysql的使用</h3><h4 id="1、启动Mysql"><a href="#1、启动Mysql" class="headerlink" title="1、启动Mysql"></a>1、启动Mysql</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">~ &gt; sudo /etc/init.d/mysql start </span><br><span class="line">~ &gt; sudo service mysql start # 两种方式都可以</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、停止Mysql"><a href="#2、停止Mysql" class="headerlink" title="2、停止Mysql"></a>2、停止Mysql</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">~ &gt; sudo /etc/init.d/mysql stop</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">或者</span></span><br><span class="line">~ &gt; sudo service mysql stop</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、重启Mysql"><a href="#3、重启Mysql" class="headerlink" title="3、重启Mysql"></a>3、重启Mysql</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">~ &gt; sudo/etc/init.d/mysql restart</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">或者</span></span><br><span class="line">~ &gt; sudo service mysql restart</span><br></pre></td></tr></table></figure>
+
+<h4 id="4、设置用户名和密码（安装过程中如果设置了可以跳过）"><a href="#4、设置用户名和密码（安装过程中如果设置了可以跳过）" class="headerlink" title="4、设置用户名和密码（安装过程中如果设置了可以跳过）"></a>4、设置用户名和密码（安装过程中如果设置了可以跳过）</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">~ &gt; sudo cat /etc/mysql/debian.cnf #查看系统默认的账号和密码</span><br><span class="line">~ &gt; mysql -u默认用户名 -p默认密码 # 登录Mysql</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、重置用户名和密码"><a href="#5、重置用户名和密码" class="headerlink" title="5、重置用户名和密码"></a>5、重置用户名和密码</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">mysql&gt; </span><span class="language-bash">use mysql;</span></span><br><span class="line"><span class="meta prompt_">mysql&gt; </span><span class="language-bash">update mysql.user <span class="built_in">set</span> authentication_string=password(<span class="string">&#x27;123456&#x27;</span>) <span class="built_in">where</span> user=<span class="string">&#x27;root&#x27;</span> and Host =<span class="string">&#x27;localhost&#x27;</span>;</span> </span><br><span class="line"><span class="meta prompt_">mysql&gt; </span><span class="language-bash">update user <span class="built_in">set</span>  plugin=<span class="string">&quot;mysql_native_password&quot;</span>;</span>     </span><br><span class="line"><span class="meta prompt_">mysql&gt; </span><span class="language-bash">flush privileges;</span>      </span><br><span class="line"><span class="meta prompt_">mysql&gt; </span><span class="language-bash">quit;</span>     </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">mysql80设置密码</span></span><br><span class="line"><span class="meta prompt_">mysql&gt; </span><span class="language-bash">use mysql;</span>    </span><br><span class="line"><span class="meta prompt_">mysql&gt; </span><span class="language-bash">alter user <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> identified with mysql_native_password by <span class="string">&#x27;123456&#x27;</span>;</span>   </span><br><span class="line"><span class="meta prompt_">mysql&gt; </span><span class="language-bash">flush privileges;</span> </span><br></pre></td></tr></table></figure>
+
+<h3 id="三、报错处理"><a href="#三、报错处理" class="headerlink" title="三、报错处理"></a>三、报错处理</h3><p>连接数据库，启动时报错。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/image.1cemrbvyybds.webp" alt="tupian"></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">~ &gt; mysql -u root -p #使用账户名和密码登录</span><br></pre></td></tr></table></figure>
+
+<p>启动时警告。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/image.6kfxmhtp8og0.webp" alt="tupian"></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">第一个警告</span></span><br><span class="line">~ &gt; sudo touch /lib/apparmor/profile-load #创建文件</span><br><span class="line">~ &gt; chmod 777 /lib/apparmor/profile-load #给文件赋予权限</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">第二个警告，这种错误一般是 mysql 服务器异常关机导致的</span></span><br><span class="line">~ &gt; sudo service mysql stop</span><br><span class="line">~ &gt; sudo usermod -d /var/lib/mysql/ mysql</span><br><span class="line">~ &gt; sudo service mysql start</span><br></pre></td></tr></table></figure>
+
+<p>今天遇到的唯一的一个坑，但是却浪费了我大半天，弄到最后才发现是有两个配置文件改错了。</p>
+<p>遇到<code>zsh:command not fu=ound:mysql</code>的错误时，千万不要用<a class="link"   href="https://www.cnblogs.com/sashuishui/p/14774355.html%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%8C%E5%9D%91%E4%BA%BA%E4%B8%8D%E6%B5%85%EF%BC%8C%E8%BF%99%E4%BC%9A%E5%AF%BC%E8%87%B4%E8%BE%93%E5%85%A5mysql%E6%8A%A5%E9%94%99%EF%BC%8C%E4%BD%86%E6%98%AF%E4%BD%A0%E8%BF%98%E6%89%BE%E4%B8%8D%E5%88%B0%E6%98%AF%E5%93%AA%E9%87%8C%E6%9C%89%E9%97%AE%E9%A2%98%EF%BC%8C%E8%87%AA%E9%97%AD%E4%BA%86%E5%8D%8A%E5%A4%A9%EF%BC%8C%E6%89%8D%E6%89%BE%E5%88%B0%E9%97%AE%E9%A2%98%EF%BC%88%E4%B8%BB%E8%A6%81%E4%B9%9F%E4%B8%8D%E6%98%AFLinux%E9%AB%98%E6%89%8B%EF%BC%89%EF%BC%8C%E4%B8%8D%E8%BF%87%E4%B9%9F%E5%AD%A6%E5%88%B0%E4%BA%86%E3%80%82" >https://www.cnblogs.com/sashuishui/p/14774355.html的方法，坑人不浅，这会导致输入mysql报错，但是你还找不到是哪里有问题，自闭了半天，才找到问题（主要也不是Linux高手），不过也学到了。<i class="fas fa-external-link-alt"></i></a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd ~</span><br><span class="line">vim ~/.bashrc</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">打开的文档中加入下面这句话</span></span><br><span class="line">alias 程序名 = 路径 # 可以让指定终端寻找程序入口的路径</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">保存并退出后执行下面命令</span></span><br><span class="line">source ~/.bashrc</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">若没有生效，则执行以下命令</span></span><br><span class="line">vim ~/.bash_profile</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在打开的文档中加入下面这句</span></span><br><span class="line">source ~/.bashrc</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">保存并退出后执行以下命令</span></span><br><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
+
+<h3 id="四、-彻底卸载Mysql"><a href="#四、-彻底卸载Mysql" class="headerlink" title="四、 彻底卸载Mysql"></a>四、 彻底卸载Mysql</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">~ &gt; sudo apt-get autoremove mysql* --purge</span><br><span class="line">~ &gt; sudo apt-get remove apparmor</span><br><span class="line">~ &gt; dpkg -l |grep ^rc|awk &#x27;&#123;print $2&#125;&#x27; |sudo xargs dpkg -P # 清理残留数据</span><br><span class="line">~ &gt; dpkg --list|grep mysql # 查看依赖项</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>OKOK，就写到这里，累了累了，明天开始更新技术篇以及LeetCode，努力努力！！！🤖🤖🤖🤖🤖</p>
+]]></content>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
 </search>
