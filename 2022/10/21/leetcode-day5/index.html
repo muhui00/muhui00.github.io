@@ -9,7 +9,7 @@
     
     <title>
         
-            leetcode_day4 |
+            leetcode_day5 |
         
         muhui&#39;s blog
     </title>
@@ -169,7 +169,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">leetcode_day4</span>
+            <span class="title-hover-animation">leetcode_day5</span>
         </div>
 
         
@@ -188,8 +188,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-10-19 18:32:25</span>
-        <span class="mobile">2022-10-19 18:32</span>
+        <span class="pc">2022-10-21 17:07:41</span>
+        <span class="mobile">2022-10-21 17:07</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -209,7 +209,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/%E6%9C%89%E6%95%88%E7%9A%84%E6%95%B0%E7%8B%AC/">有效的数独</a>&nbsp;
+                        <a href="/tags/%E7%9F%A9%E9%98%B5%E7%BD%AE%E9%9B%B6/">矩阵置零</a>&nbsp;
                     </li>
                 
             </ul>
@@ -219,12 +219,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>451 Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>258 Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>2 Mins</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>1 Mins</span>
         </span>
     
     
@@ -240,31 +240,22 @@
         
 
         <div class="article-content markdown-body">
-            <h3 id="有效的数独"><a href="#有效的数独" class="headerlink" title="有效的数独"></a>有效的数独</h3><p>题目描述<br>请你判断一个 9 x 9 的数独是否有效。只需要 根据以下规则 ，验证已经填入的数字是否有效即可。</p>
-<ol>
-<li>数字 1-9 在每一行只能出现一次。</li>
-<li>数字 1-9 在每一列只能出现一次。</li>
-<li>数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。（请参考示例图）</li>
-</ol>
-<p><strong>注意</strong></p>
-<ul>
-<li>一个有效的数独（部分已被填充）不一定是可解的。</li>
-<li>只需要根据以上规则，验证已经填入的数字是否有效即可。</li>
-<li>空白格用 ‘.’ 表示。</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/250px-sudoku-by-l2g-20050714svg.11g34v5akffk.webp" alt="图片"></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @lc app=leetcode.cn id=36 lang=cpp</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * [36] 有效的数独</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// @lc code=start</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValidSudoku</span><span class="params">(vector&lt;vector&lt;<span class="type">char</span>&gt;&gt; &amp;board)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> rows[<span class="number">9</span>][<span class="number">9</span>];        <span class="comment">//保存行中数字1-9出现的次数</span></span><br><span class="line">        <span class="type">int</span> colomns[<span class="number">9</span>][<span class="number">9</span>];     <span class="comment">//保存列中数字1-9出现的次数</span></span><br><span class="line">        <span class="type">int</span> subboxes[<span class="number">3</span>][<span class="number">3</span>][<span class="number">9</span>]; <span class="comment">//保存3*3矩阵中数字1-9出现的次数</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//初始化矩阵</span></span><br><span class="line">        <span class="built_in">memset</span>(rows, <span class="number">0</span>, <span class="built_in">sizeof</span>(rows));</span><br><span class="line">        <span class="built_in">memset</span>(colomns, <span class="number">0</span>, <span class="built_in">sizeof</span>(colomns));</span><br><span class="line">        <span class="built_in">memset</span>(subboxes, <span class="number">0</span>, <span class="built_in">sizeof</span>(subboxes));</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="type">char</span> c;</span><br><span class="line">        <span class="comment">//遍历循环9*9矩阵，保存数字1-9出现的次数</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">9</span>; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                c = board[i][j];</span><br><span class="line">                <span class="keyword">if</span> (c != <span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    index = c - <span class="string">&#x27;0&#x27;</span> - <span class="number">1</span>;</span><br><span class="line">                    <span class="comment">//可以理解为一个长度为9的一维数组，顺序保存1-9数字出现的次数</span></span><br><span class="line">                    rows[i][index]++;</span><br><span class="line">                    colomns[j][index]++;</span><br><span class="line">                    <span class="comment">//可以理解为一个3*3的矩阵，顺序保存1-9数字出现的次数</span></span><br><span class="line">                    subboxes[i / <span class="number">3</span>][j / <span class="number">3</span>][index]++;</span><br><span class="line">                    <span class="comment">//每个数字记录次数超过1，return false</span></span><br><span class="line">                    <span class="keyword">if</span> (rows[i][index] &gt; <span class="number">1</span> || colomns[j][index] &gt; <span class="number">1</span> || subboxes[i / <span class="number">3</span>][j / <span class="number">3</span>][index] &gt; <span class="number">1</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// @lc code=end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+            <h3 id="矩阵置零"><a href="#矩阵置零" class="headerlink" title="矩阵置零"></a>矩阵置零</h3><p><strong>题目描述</strong><br>    给定一个 m x n 的矩阵，如果一个元素为 0 ，则将其所在行和列的所有元素都设为 0 。请使用原地算法。</p>
+<p><em>示例：</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：matrix = [[1,1,1],[1,0,1],[1,1,1]]</span><br><span class="line">输出：[[1,0,1],[0,0,0],[1,0,1]</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.staticaly.com/gh/muhui00/image-hosting@master/image.1tld39pszif.webp" alt="image"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @lc app=leetcode.cn id=73 lang=cpp</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * [73] 矩阵置零</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// @lc code=start</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setZeroes</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; &amp;matrix)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> row = matrix.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> col = matrix[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt; pos;</span><br><span class="line">        <span class="comment">//记录元素为0的坐标</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; row; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; col; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (matrix[i][j] == <span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line"></span><br><span class="line">                    pos[i].<span class="built_in">push_back</span>(j);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt;::iterator it = pos.<span class="built_in">begin</span>(); it != pos.<span class="built_in">end</span>(); it++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> ir = (*it).first;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; pos[ir].<span class="built_in">size</span>(); i++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="type">int</span> jc = pos[ir][i];</span><br><span class="line">                <span class="comment">//列置零</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> ii = <span class="number">0</span>; ii &lt; row; ii++)</span><br><span class="line">                &#123;</span><br><span class="line">                    matrix[ii][jc] = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//行置零</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> jj = <span class="number">0</span>; jj &lt; col; jj++)</span><br><span class="line">                &#123;</span><br><span class="line">                    matrix[ir][jj] = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// @lc code=end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
         </div>
 
         
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>Post title：leetcode_day4</li>
+        <li>Post title：leetcode_day5</li>
         <li>Post author：muhui</li>
-        <li>Create time：2022-10-19 18:32:25</li>
+        <li>Create time：2022-10-21 17:07:41</li>
         <li>
-            Post link：https://muhui00.github.io/2022/10/19/leetcode-day4/
+            Post link：https://muhui00.github.io/2022/10/21/leetcode-day5/
         </li>
         <li>
             Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
@@ -279,7 +270,7 @@
             <ul class="post-tags-box">
                 
                     <li class="tag-item">
-                        <a href="/tags/%E6%9C%89%E6%95%88%E7%9A%84%E6%95%B0%E7%8B%AC/">#有效的数独</a>&nbsp;
+                        <a href="/tags/%E7%9F%A9%E9%98%B5%E7%BD%AE%E9%9B%B6/">#矩阵置零</a>&nbsp;
                     </li>
                 
             </ul>
@@ -288,29 +279,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2022/10/21/leetcode-day5/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">leetcode_day5</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/10/18/leetcode-day3/"
+                           href="/2022/10/19/leetcode-day4/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">leetcode_day3</span>
+                                <span class="post-nav-title-item">leetcode_day4</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -515,7 +491,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E6%95%88%E7%9A%84%E6%95%B0%E7%8B%AC"><span class="nav-text">有效的数独</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E7%BD%AE%E9%9B%B6"><span class="nav-text">矩阵置零</span></a></li></ol>
     </div>
 </div>
         </aside>
