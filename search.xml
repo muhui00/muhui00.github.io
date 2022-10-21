@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Protobuf报错修正</title>
+    <url>/2022/04/19/Protobuf%E6%8A%A5%E9%94%99%E4%BF%AE%E6%AD%A3/</url>
+    <content><![CDATA[<p>​	今天在VS使用Linux远程编译项目代码的时候，Linux编译报错，查看错误提示发现是提示Linux下Protobuf版本有问题。</p>
+<p>​	查看windows下的Protobuf的版本为 <code>libprotoc 3.8.0</code>；</p>
+<p>​	查看Linux下的Protobuf的版本为 <code>libprotoc 3.13.0</code>；</p>
+<p>​	我是在windows下编译<code>.proto</code>文件生成的<code>C++</code>类，版本低于Linux下的环境，导致编译的时候版本不兼容。</p>
+<p>解决办法</p>
+<ol>
+<li>​	更新windows下的Protubuf版本与Linux下的一致，重新编译<code>.proto</code>文件，并且替换项目中的<code>C++</code>类。</li>
+<li>​	将Linux下的Protobuf版本替换为window下的版本，直接编译项目即可。</li>
+</ol>
+<p>我是替换的Linux下的Protobuf版本。</p>
+<h4 id="Linux下Protobuf替换版本的步骤"><a href="#Linux下Protobuf替换版本的步骤" class="headerlink" title="Linux下Protobuf替换版本的步骤"></a>Linux下Protobuf替换版本的步骤</h4><ol>
+<li>​	卸载</li>
+</ol>
+<p>​			<code>sudo apt-get remove libprotobuf-dev</code></p>
+<ol start="2">
+<li>​	删除路径</li>
+</ol>
+<p>​			<code>which protoc</code>查看路径，然后将其删除即可。</p>
+<ol start="3">
+<li>​	安装</li>
+</ol>
+<ul>
+<li><p>下载源码安装包: <code>protobuf-cpp-3.8.0.tar.gz</code></p>
+</li>
+<li><p>解压缩</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">tar zxvf protobuf-cpp-3.8.0.tar.gz</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装 -&gt; 进入到解压目录</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> protobuf-3.8.0</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./configure</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make check	(可选)</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo make install</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>版本替换完成之后成功解决问题。<br><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/image.7bvx6pc5xb40.webp" alt="图片"></p>
+]]></content>
+      <categories>
+        <category>Protobuf</category>
+      </categories>
+      <tags>
+        <tag>Protobuf</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Base64编解码</title>
     <url>/2022/04/15/Base64%E7%BC%96%E8%A7%A3%E7%A0%81/</url>
     <content><![CDATA[<h1 id="Base64编解码"><a href="#Base64编解码" class="headerlink" title="Base64编解码"></a>Base64编解码</h1><h2 id="1、应用目的"><a href="#1、应用目的" class="headerlink" title="1、应用目的"></a>1、应用目的</h2><p>在计算机中任何数据都是按ascii码存储的，而ascii码的128～255之间的值是不可见字符。将数据先做一个Base64编码，统统变成可见字符，在多设备数据传输的过程中，可以降低数据出错的可能性。</p>
@@ -49,60 +91,26 @@
       </tags>
   </entry>
   <entry>
-    <title>Protobuf报错修正</title>
-    <url>/2022/04/19/Protobuf%E6%8A%A5%E9%94%99%E4%BF%AE%E6%AD%A3/</url>
-    <content><![CDATA[<p>​	今天在VS使用Linux远程编译项目代码的时候，Linux编译报错，查看错误提示发现是提示Linux下Protobuf版本有问题。</p>
-<p>​	查看windows下的Protobuf的版本为 <code>libprotoc 3.8.0</code>；</p>
-<p>​	查看Linux下的Protobuf的版本为 <code>libprotoc 3.13.0</code>；</p>
-<p>​	我是在windows下编译<code>.proto</code>文件生成的<code>C++</code>类，版本低于Linux下的环境，导致编译的时候版本不兼容。</p>
-<p>解决办法</p>
-<ol>
-<li>​	更新windows下的Protubuf版本与Linux下的一致，重新编译<code>.proto</code>文件，并且替换项目中的<code>C++</code>类。</li>
-<li>​	将Linux下的Protobuf版本替换为window下的版本，直接编译项目即可。</li>
-</ol>
-<p>我是替换的Linux下的Protobuf版本。</p>
-<h4 id="Linux下Protobuf替换版本的步骤"><a href="#Linux下Protobuf替换版本的步骤" class="headerlink" title="Linux下Protobuf替换版本的步骤"></a>Linux下Protobuf替换版本的步骤</h4><ol>
-<li>​	卸载</li>
-</ol>
-<p>​			<code>sudo apt-get remove libprotobuf-dev</code></p>
-<ol start="2">
-<li>​	删除路径</li>
-</ol>
-<p>​			<code>which protoc</code>查看路径，然后将其删除即可。</p>
-<ol start="3">
-<li>​	安装</li>
-</ol>
-<ul>
-<li><p>下载源码安装包: <code>protobuf-cpp-3.8.0.tar.gz</code></p>
-</li>
-<li><p>解压缩</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">tar zxvf protobuf-cpp-3.8.0.tar.gz</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装 -&gt; 进入到解压目录</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> protobuf-3.8.0</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./configure</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make check	(可选)</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo make install</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>版本替换完成之后成功解决问题。<br><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/image.7bvx6pc5xb40.webp" alt="图片"></p>
-]]></content>
-      <categories>
-        <category>Protobuf</category>
-      </categories>
-      <tags>
-        <tag>Protobuf</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Ubuntu终端切换</title>
-    <url>/2022/04/23/Ubuntu%E7%BB%88%E7%AB%AF%E5%88%87%E6%8D%A2/</url>
-    <content><![CDATA[<p>zsh、bash切换</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">切换bash</span><br><span class="line">chsh -s /bin/bash</span><br><span class="line"></span><br><span class="line">切换zsh</span><br><span class="line">chsh -s /bin/zsh</span><br></pre></td></tr></table></figure>
+    <title>leetcode_day1</title>
+    <url>/2022/09/21/leetcode-day1/</url>
+    <content><![CDATA[<h3 id="题目217-存在重复元素"><a href="#题目217-存在重复元素" class="headerlink" title="题目217. 存在重复元素"></a>题目217. 存在重复元素</h3><p><strong>题目描述：</strong>给你一个整数数组 <code>nums</code> 。如果任一值在数组中出现 <strong>至少两次</strong> ，返回 <code>true</code> ；如果数组中每个元素互不相同，返回 <code>false</code> 。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//暴力排序</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">containsDuplicate</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(),nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n<span class="number">-1</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i]==nums[i+<span class="number">1</span>])</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/image.3jzjgymwaay0.webp" alt="tupian"></p>
+<p>借助unordered_set容器来判断是否有重复元素，首先对于数组中每个元素都将它插入到哈希表中。如果下次插入插入元素时发现该元素已经存在于哈希表中，则说明存在重复的元素。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//哈希表set</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">containsDuplicate</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        unordered_set&lt;<span class="type">int</span>&gt; us;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> num: nums)&#123;</span><br><span class="line">            <span class="keyword">if</span>(us.<span class="built_in">find</span>(num) != us.<span class="built_in">end</span>()) <span class="comment">//增强for循环</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            us.<span class="built_in">insert</span>(num);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">containsDuplicate</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        set&lt;<span class="type">int</span>&gt; s;</span><br><span class="line">        <span class="type">int</span> len = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">            <span class="keyword">auto</span> it = s.<span class="built_in">find</span>(nums[i]);</span><br><span class="line">            <span class="keyword">if</span>(it != s.<span class="built_in">end</span>())&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            s.<span class="built_in">insert</span>(nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>用unordered_map容器统计每一个元素出现的次数，然后在遍历整个map容器查看是否有元素出现的次数大于等于2。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//哈希表map</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">containsDuplicate</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.<span class="built_in">size</span>()&lt;=<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        unordered_map&lt;<span class="type">int</span>,<span class="type">int</span>&gt; up;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> num: nums)&#123;</span><br><span class="line">            up[num]++;</span><br><span class="line">            <span class="keyword">if</span>(up[num]&gt;=<span class="number">2</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="题目53-最大子数组和"><a href="#题目53-最大子数组和" class="headerlink" title="题目53 最大子数组和"></a>题目53 最大子数组和</h3><p><strong>题目描述：</strong>给你一个整数数组 <code>nums</code> 。请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和 。<strong>子数组</strong> 是数组中的一个连续部分。<br><strong>思路：动态规划</strong><br>状态方程：<code>dp[i] = max(dp[i-1] + nums[i], nums[i])</code></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> INI_MIN -65535</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 1 暴力枚举(超出时间限制)</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxSubArray</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> max = INI_MIN;</span><br><span class="line">        <span class="type">int</span> len = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i; j &lt; len; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                sum += nums[j];</span><br><span class="line">                <span class="keyword">if</span> (sum &gt; max)</span><br><span class="line">                &#123;</span><br><span class="line">                    max = sum;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 2 动态规划</span></span><br><span class="line">    <span class="comment">//状态方程 dp[i] = max(di[i-1]+nums[i],nums[i])</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxSubArray2</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//类似寻找最大最小值的题目，初始值一定要定义成理论上的最小最大值</span></span><br><span class="line">        <span class="type">int</span> result = INI_MIN;</span><br><span class="line">        <span class="type">int</span> len = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// dp[i]表示nums中以nums[i]结尾的最大子序和</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(len)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">        result = dp[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; len; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>] + nums[i], nums[i]);</span><br><span class="line">            result = <span class="built_in">max</span>(result, dp[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//分治法（还没学会）</span></span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
-        <category>Ubuntu</category>
+        <category>数据结构</category>
       </categories>
       <tags>
-        <tag>Ubuntu</tag>
+        <tag>leetcode</tag>
       </tags>
   </entry>
   <entry>
@@ -259,29 +267,6 @@
       </tags>
   </entry>
   <entry>
-    <title>leetcode_day1</title>
-    <url>/2022/09/21/leetcode-day1/</url>
-    <content><![CDATA[<h3 id="题目217-存在重复元素"><a href="#题目217-存在重复元素" class="headerlink" title="题目217. 存在重复元素"></a>题目217. 存在重复元素</h3><p><strong>题目描述：</strong>给你一个整数数组 <code>nums</code> 。如果任一值在数组中出现 <strong>至少两次</strong> ，返回 <code>true</code> ；如果数组中每个元素互不相同，返回 <code>false</code> 。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//暴力排序</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">containsDuplicate</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(),nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n<span class="number">-1</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i]==nums[i+<span class="number">1</span>])</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>借助unordered_set容器来判断是否有重复元素，首先对于数组中每个元素都将它插入到哈希表中。如果下次插入插入元素时发现该元素已经存在于哈希表中，则说明存在重复的元素。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//哈希表set</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">containsDuplicate</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        unordered_set&lt;<span class="type">int</span>&gt; us;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> num: nums)&#123;</span><br><span class="line">            <span class="keyword">if</span>(us.<span class="built_in">find</span>(num) != us.<span class="built_in">end</span>()) <span class="comment">//增强for循环</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            us.<span class="built_in">insert</span>(num);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">containsDuplicate</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        set&lt;<span class="type">int</span>&gt; s;</span><br><span class="line">        <span class="type">int</span> len = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">            <span class="keyword">auto</span> it = s.<span class="built_in">find</span>(nums[i]);</span><br><span class="line">            <span class="keyword">if</span>(it != s.<span class="built_in">end</span>())&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            s.<span class="built_in">insert</span>(nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>用unordered_map容器统计每一个元素出现的次数，然后在遍历整个map容器查看是否有元素出现的次数大于等于2。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//哈希表map</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">containsDuplicate</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.<span class="built_in">size</span>()&lt;=<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        unordered_map&lt;<span class="type">int</span>,<span class="type">int</span>&gt; up;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> num: nums)&#123;</span><br><span class="line">            up[num]++;</span><br><span class="line">            <span class="keyword">if</span>(up[num]&gt;=<span class="number">2</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="题目53-最大子数组和"><a href="#题目53-最大子数组和" class="headerlink" title="题目53 最大子数组和"></a>题目53 最大子数组和</h3><p><strong>题目描述：</strong>给你一个整数数组 <code>nums</code> 。请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和 。<strong>子数组</strong> 是数组中的一个连续部分。<br><strong>思路：动态规划</strong><br>状态方程：<code>dp[i] = max(dp[i-1] + nums[i], nums[i])</code></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> INI_MIN -65535</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 1 暴力枚举(超出时间限制)</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxSubArray</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> max = INI_MIN;</span><br><span class="line">        <span class="type">int</span> len = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i; j &lt; len; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                sum += nums[j];</span><br><span class="line">                <span class="keyword">if</span> (sum &gt; max)</span><br><span class="line">                &#123;</span><br><span class="line">                    max = sum;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 2 动态规划</span></span><br><span class="line">    <span class="comment">//状态方程 dp[i] = max(di[i-1]+nums[i],nums[i])</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxSubArray2</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//类似寻找最大最小值的题目，初始值一定要定义成理论上的最小最大值</span></span><br><span class="line">        <span class="type">int</span> result = INI_MIN;</span><br><span class="line">        <span class="type">int</span> len = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// dp[i]表示nums中以nums[i]结尾的最大子序和</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(len)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">        result = dp[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; len; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>] + nums[i], nums[i]);</span><br><span class="line">            result = <span class="built_in">max</span>(result, dp[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//分治法（还没学会）</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>leetcode_day2</title>
     <url>/2022/10/17/leetcode-day2/</url>
     <content><![CDATA[<h3 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1 两数之和"></a>1 两数之和</h3><p><strong>题目描述</strong><br>    给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那两个整数，并返回它们的数组下标。</p>
@@ -312,27 +297,18 @@
       </tags>
   </entry>
   <entry>
-    <title>leetcode_day4</title>
-    <url>/2022/10/19/leetcode-day4/</url>
-    <content><![CDATA[<h3 id="有效的数独"><a href="#有效的数独" class="headerlink" title="有效的数独"></a>有效的数独</h3><p>题目描述<br>请你判断一个 9 x 9 的数独是否有效。只需要 根据以下规则 ，验证已经填入的数字是否有效即可。</p>
-<ol>
-<li>数字 1-9 在每一行只能出现一次。</li>
-<li>数字 1-9 在每一列只能出现一次。</li>
-<li>数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。（请参考示例图）</li>
-</ol>
-<p><strong>注意</strong></p>
-<ul>
-<li>一个有效的数独（部分已被填充）不一定是可解的。</li>
-<li>只需要根据以上规则，验证已经填入的数字是否有效即可。</li>
-<li>空白格用 ‘.’ 表示。</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/250px-sudoku-by-l2g-20050714svg.11g34v5akffk.webp" alt="图片"></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @lc app=leetcode.cn id=36 lang=cpp</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * [36] 有效的数独</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// @lc code=start</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValidSudoku</span><span class="params">(vector&lt;vector&lt;<span class="type">char</span>&gt;&gt; &amp;board)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> rows[<span class="number">9</span>][<span class="number">9</span>];        <span class="comment">//保存行中数字1-9出现的次数</span></span><br><span class="line">        <span class="type">int</span> colomns[<span class="number">9</span>][<span class="number">9</span>];     <span class="comment">//保存列中数字1-9出现的次数</span></span><br><span class="line">        <span class="type">int</span> subboxes[<span class="number">3</span>][<span class="number">3</span>][<span class="number">9</span>]; <span class="comment">//保存3*3矩阵中数字1-9出现的次数</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//初始化矩阵</span></span><br><span class="line">        <span class="built_in">memset</span>(rows, <span class="number">0</span>, <span class="built_in">sizeof</span>(rows));</span><br><span class="line">        <span class="built_in">memset</span>(colomns, <span class="number">0</span>, <span class="built_in">sizeof</span>(colomns));</span><br><span class="line">        <span class="built_in">memset</span>(subboxes, <span class="number">0</span>, <span class="built_in">sizeof</span>(subboxes));</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="type">char</span> c;</span><br><span class="line">        <span class="comment">//遍历循环9*9矩阵，保存数字1-9出现的次数</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">9</span>; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                c = board[i][j];</span><br><span class="line">                <span class="keyword">if</span> (c != <span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    index = c - <span class="string">&#x27;0&#x27;</span> - <span class="number">1</span>;</span><br><span class="line">                    <span class="comment">//可以理解为一个长度为9的一维数组，顺序保存1-9数字出现的次数</span></span><br><span class="line">                    rows[i][index]++;</span><br><span class="line">                    colomns[j][index]++;</span><br><span class="line">                    <span class="comment">//可以理解为一个3*3的矩阵，顺序保存1-9数字出现的次数</span></span><br><span class="line">                    subboxes[i / <span class="number">3</span>][j / <span class="number">3</span>][index]++;</span><br><span class="line">                    <span class="comment">//每个数字记录次数超过1，return false</span></span><br><span class="line">                    <span class="keyword">if</span> (rows[i][index] &gt; <span class="number">1</span> || colomns[j][index] &gt; <span class="number">1</span> || subboxes[i / <span class="number">3</span>][j / <span class="number">3</span>][index] &gt; <span class="number">1</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// @lc code=end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    <title>Ubuntu终端切换</title>
+    <url>/2022/04/23/Ubuntu%E7%BB%88%E7%AB%AF%E5%88%87%E6%8D%A2/</url>
+    <content><![CDATA[<p>zsh、bash切换</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">切换bash</span><br><span class="line">chsh -s /bin/bash</span><br><span class="line"></span><br><span class="line">切换zsh</span><br><span class="line">chsh -s /bin/zsh</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/image.3jzjgymwaay0.webp" alt="tupian"></p>
+]]></content>
       <categories>
-        <category>数据结构</category>
+        <category>Ubuntu</category>
       </categories>
       <tags>
-        <tag>leetcode</tag>
+        <tag>Ubuntu</tag>
       </tags>
   </entry>
   <entry>
@@ -406,6 +382,30 @@
       </categories>
       <tags>
         <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leetcode_day4</title>
+    <url>/2022/10/19/leetcode-day4/</url>
+    <content><![CDATA[<h3 id="有效的数独"><a href="#有效的数独" class="headerlink" title="有效的数独"></a>有效的数独</h3><p>题目描述<br>请你判断一个 9 x 9 的数独是否有效。只需要 根据以下规则 ，验证已经填入的数字是否有效即可。</p>
+<ol>
+<li>数字 1-9 在每一行只能出现一次。</li>
+<li>数字 1-9 在每一列只能出现一次。</li>
+<li>数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。（请参考示例图）</li>
+</ol>
+<p><strong>注意</strong></p>
+<ul>
+<li>一个有效的数独（部分已被填充）不一定是可解的。</li>
+<li>只需要根据以上规则，验证已经填入的数字是否有效即可。</li>
+<li>空白格用 ‘.’ 表示。</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/250px-sudoku-by-l2g-20050714svg.11g34v5akffk.webp" alt="图片"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @lc app=leetcode.cn id=36 lang=cpp</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * [36] 有效的数独</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// @lc code=start</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValidSudoku</span><span class="params">(vector&lt;vector&lt;<span class="type">char</span>&gt;&gt; &amp;board)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> rows[<span class="number">9</span>][<span class="number">9</span>];        <span class="comment">//保存行中数字1-9出现的次数</span></span><br><span class="line">        <span class="type">int</span> colomns[<span class="number">9</span>][<span class="number">9</span>];     <span class="comment">//保存列中数字1-9出现的次数</span></span><br><span class="line">        <span class="type">int</span> subboxes[<span class="number">3</span>][<span class="number">3</span>][<span class="number">9</span>]; <span class="comment">//保存3*3矩阵中数字1-9出现的次数</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//初始化矩阵</span></span><br><span class="line">        <span class="built_in">memset</span>(rows, <span class="number">0</span>, <span class="built_in">sizeof</span>(rows));</span><br><span class="line">        <span class="built_in">memset</span>(colomns, <span class="number">0</span>, <span class="built_in">sizeof</span>(colomns));</span><br><span class="line">        <span class="built_in">memset</span>(subboxes, <span class="number">0</span>, <span class="built_in">sizeof</span>(subboxes));</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="type">char</span> c;</span><br><span class="line">        <span class="comment">//遍历循环9*9矩阵，保存数字1-9出现的次数</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">9</span>; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                c = board[i][j];</span><br><span class="line">                <span class="keyword">if</span> (c != <span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    index = c - <span class="string">&#x27;0&#x27;</span> - <span class="number">1</span>;</span><br><span class="line">                    <span class="comment">//可以理解为一个长度为9的一维数组，顺序保存1-9数字出现的次数</span></span><br><span class="line">                    rows[i][index]++;</span><br><span class="line">                    colomns[j][index]++;</span><br><span class="line">                    <span class="comment">//可以理解为一个3*3的矩阵，顺序保存1-9数字出现的次数</span></span><br><span class="line">                    subboxes[i / <span class="number">3</span>][j / <span class="number">3</span>][index]++;</span><br><span class="line">                    <span class="comment">//每个数字记录次数超过1，return false</span></span><br><span class="line">                    <span class="keyword">if</span> (rows[i][index] &gt; <span class="number">1</span> || colomns[j][index] &gt; <span class="number">1</span> || subboxes[i / <span class="number">3</span>][j / <span class="number">3</span>][index] &gt; <span class="number">1</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// @lc code=end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>有效的数独</tag>
       </tags>
   </entry>
 </search>
