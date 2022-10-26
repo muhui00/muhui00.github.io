@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Protobuf报错修正</title>
+    <url>/2022/04/19/Protobuf%E6%8A%A5%E9%94%99%E4%BF%AE%E6%AD%A3/</url>
+    <content><![CDATA[<p>​	今天在VS使用Linux远程编译项目代码的时候，Linux编译报错，查看错误提示发现是提示Linux下Protobuf版本有问题。</p>
+<p>​	查看windows下的Protobuf的版本为 <code>libprotoc 3.8.0</code>；</p>
+<p>​	查看Linux下的Protobuf的版本为 <code>libprotoc 3.13.0</code>；</p>
+<p>​	我是在windows下编译<code>.proto</code>文件生成的<code>C++</code>类，版本低于Linux下的环境，导致编译的时候版本不兼容。</p>
+<p>解决办法</p>
+<ol>
+<li>​	更新windows下的Protubuf版本与Linux下的一致，重新编译<code>.proto</code>文件，并且替换项目中的<code>C++</code>类。</li>
+<li>​	将Linux下的Protobuf版本替换为window下的版本，直接编译项目即可。</li>
+</ol>
+<p>我是替换的Linux下的Protobuf版本。</p>
+<h4 id="Linux下Protobuf替换版本的步骤"><a href="#Linux下Protobuf替换版本的步骤" class="headerlink" title="Linux下Protobuf替换版本的步骤"></a>Linux下Protobuf替换版本的步骤</h4><ol>
+<li>​	卸载</li>
+</ol>
+<p>​			<code>sudo apt-get remove libprotobuf-dev</code></p>
+<ol start="2">
+<li>​	删除路径</li>
+</ol>
+<p>​			<code>which protoc</code>查看路径，然后将其删除即可。</p>
+<ol start="3">
+<li>​	安装</li>
+</ol>
+<ul>
+<li><p>下载源码安装包: <code>protobuf-cpp-3.8.0.tar.gz</code></p>
+</li>
+<li><p>解压缩</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">tar zxvf protobuf-cpp-3.8.0.tar.gz</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装 -&gt; 进入到解压目录</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> protobuf-3.8.0</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./configure</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make check	(可选)</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo make install</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>版本替换完成之后成功解决问题。<br><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/image.7bvx6pc5xb40.webp" alt="图片"></p>
+]]></content>
+      <categories>
+        <category>Protobuf</category>
+      </categories>
+      <tags>
+        <tag>Protobuf</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Base64编解码</title>
     <url>/2022/04/15/Base64%E7%BC%96%E8%A7%A3%E7%A0%81/</url>
     <content><![CDATA[<h1 id="Base64编解码"><a href="#Base64编解码" class="headerlink" title="Base64编解码"></a>Base64编解码</h1><h2 id="1、应用目的"><a href="#1、应用目的" class="headerlink" title="1、应用目的"></a>1、应用目的</h2><p>在计算机中任何数据都是按ascii码存储的，而ascii码的128～255之间的值是不可见字符。将数据先做一个Base64编码，统统变成可见字符，在多设备数据传输的过程中，可以降低数据出错的可能性。</p>
@@ -46,74 +88,6 @@
       </categories>
       <tags>
         <tag>Base64</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Protobuf报错修正</title>
-    <url>/2022/04/19/Protobuf%E6%8A%A5%E9%94%99%E4%BF%AE%E6%AD%A3/</url>
-    <content><![CDATA[<p>​	今天在VS使用Linux远程编译项目代码的时候，Linux编译报错，查看错误提示发现是提示Linux下Protobuf版本有问题。</p>
-<p>​	查看windows下的Protobuf的版本为 <code>libprotoc 3.8.0</code>；</p>
-<p>​	查看Linux下的Protobuf的版本为 <code>libprotoc 3.13.0</code>；</p>
-<p>​	我是在windows下编译<code>.proto</code>文件生成的<code>C++</code>类，版本低于Linux下的环境，导致编译的时候版本不兼容。</p>
-<p>解决办法</p>
-<ol>
-<li>​	更新windows下的Protubuf版本与Linux下的一致，重新编译<code>.proto</code>文件，并且替换项目中的<code>C++</code>类。</li>
-<li>​	将Linux下的Protobuf版本替换为window下的版本，直接编译项目即可。</li>
-</ol>
-<p>我是替换的Linux下的Protobuf版本。</p>
-<h4 id="Linux下Protobuf替换版本的步骤"><a href="#Linux下Protobuf替换版本的步骤" class="headerlink" title="Linux下Protobuf替换版本的步骤"></a>Linux下Protobuf替换版本的步骤</h4><ol>
-<li>​	卸载</li>
-</ol>
-<p>​			<code>sudo apt-get remove libprotobuf-dev</code></p>
-<ol start="2">
-<li>​	删除路径</li>
-</ol>
-<p>​			<code>which protoc</code>查看路径，然后将其删除即可。</p>
-<ol start="3">
-<li>​	安装</li>
-</ol>
-<ul>
-<li><p>下载源码安装包: <code>protobuf-cpp-3.8.0.tar.gz</code></p>
-</li>
-<li><p>解压缩</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">tar zxvf protobuf-cpp-3.8.0.tar.gz</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装 -&gt; 进入到解压目录</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> protobuf-3.8.0</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./configure</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make check	(可选)</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo make install</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>版本替换完成之后成功解决问题。<br><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/image.7bvx6pc5xb40.webp" alt="图片"></p>
-]]></content>
-      <categories>
-        <category>Protobuf</category>
-      </categories>
-      <tags>
-        <tag>Protobuf</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>TCP滑动窗口</title>
-    <url>/2022/10/25/TCP%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>网络编程</category>
-      </categories>
-      <tags>
-        <tag>TCP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Ubuntu终端切换</title>
-    <url>/2022/04/23/Ubuntu%E7%BB%88%E7%AB%AF%E5%88%87%E6%8D%A2/</url>
-    <content><![CDATA[<p>zsh、bash切换</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">切换bash</span><br><span class="line">chsh -s /bin/bash</span><br><span class="line"></span><br><span class="line">切换zsh</span><br><span class="line">chsh -s /bin/zsh</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/image.3jzjgymwaay0.webp" alt="tupian"></p>
-]]></content>
-      <categories>
-        <category>Ubuntu</category>
-      </categories>
-      <tags>
-        <tag>Ubuntu</tag>
       </tags>
   </entry>
   <entry>
@@ -270,18 +244,104 @@
       </tags>
   </entry>
   <entry>
-    <title>leetcode_day2</title>
-    <url>/2022/10/17/leetcode-day2/</url>
-    <content><![CDATA[<h3 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1 两数之和"></a>1 两数之和</h3><p><strong>题目描述</strong><br>    给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那两个整数，并返回它们的数组下标。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//暴力遍历</span></span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums, <span class="type">int</span> target)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> len = (<span class="type">int</span>)nums.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; s;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len - <span class="number">1</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; len; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[i] + nums[j] == target)</span><br><span class="line">                &#123;</span><br><span class="line">                    s.<span class="built_in">push_back</span>(i);</span><br><span class="line">                    s.<span class="built_in">push_back</span>(j);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//哈希表</span></span><br><span class="line">    <span class="comment">//使用哈希表，可以将寻找 target - x 的时间复杂度降低到从 O(N)降低到O(1)。这样     我们创建一个哈希表，对于每一个 x，我们首先查询哈希表中是否存在target - x，然后将     x 插入到哈希表中，即可保证不会让 x 和自己匹配。</span></span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum_hash</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums, <span class="type">int</span> target)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// key : nums[], value : i</span></span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; hash;</span><br><span class="line">        <span class="type">int</span> len = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//迭代查找</span></span><br><span class="line">            <span class="keyword">auto</span> it = hash.<span class="built_in">find</span>(target - nums[i]);</span><br><span class="line">            <span class="keyword">if</span> (it != hash.<span class="built_in">end</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> &#123;it-&gt;second, i&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//循环插入</span></span><br><span class="line">            hash[nums[i]] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; nums = &#123;<span class="number">3</span>, <span class="number">2</span>, <span class="number">4</span>&#125;;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; result;</span><br><span class="line">    <span class="type">int</span> target = <span class="number">6</span>;</span><br><span class="line">    Solution s;</span><br><span class="line">    result = s.<span class="built_in">twoSum</span>(nums, target);</span><br><span class="line">    cout &lt;&lt; result[<span class="number">0</span>] &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; result[<span class="number">1</span>] &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    <title>Ubuntu终端切换</title>
+    <url>/2022/04/23/Ubuntu%E7%BB%88%E7%AB%AF%E5%88%87%E6%8D%A2/</url>
+    <content><![CDATA[<p>zsh、bash切换</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">切换bash</span><br><span class="line">chsh -s /bin/bash</span><br><span class="line"></span><br><span class="line">切换zsh</span><br><span class="line">chsh -s /bin/zsh</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-合并两个有序数组"><a href="#2-合并两个有序数组" class="headerlink" title="2 合并两个有序数组"></a>2 合并两个有序数组</h3><p><strong>题目描述</strong><br>    给你两个按 非递减顺序 排列的整数数组 nums1 和 nums2，另有两个整数 m 和 n ，分别表示 nums1 和 nums2 中的元素数目。<br>    请你合并 nums2 到 nums1 中，使合并后的数组同样按 非递减顺序排列。<br><strong>注意</strong>：最终，合并后数组不应由函数返回，而是存储在数组 nums1 中。为了应对这种情况，nums1 的初始长度为 m + n，其中前 m 个元素表示应合并的元素，后 n 个元素为 0 ，应忽略。nums2 的长度为 n 。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @lc app=leetcode.cn id=88 lang=cpp</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * [88] 合并两个有序数组</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// @lc code=start</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//直接合并后排序</span></span><br><span class="line">    <span class="comment">//时间复杂度：O((m+n)log(m+n))</span></span><br><span class="line">    <span class="comment">//空间复杂度：O(log(m+n))</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums1, <span class="type">int</span> m, vector&lt;<span class="type">int</span>&gt; &amp;nums2, <span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            nums1[m + i] = nums2[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sort</span>(nums1.<span class="built_in">begin</span>(), nums1.<span class="built_in">end</span>());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//双指针</span></span><br><span class="line">    <span class="comment">//时间复杂度：O(m+n)</span></span><br><span class="line">    <span class="comment">//空间复杂度：O(m+n)</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">merge2</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums1, <span class="type">int</span> m, vector&lt;<span class="type">int</span>&gt; &amp;nums2, <span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> p1 = <span class="number">0</span>, p2 = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> sorted[m + n];</span><br><span class="line">        <span class="type">int</span> cur;</span><br><span class="line">        <span class="keyword">while</span> (p1 &lt; m || p2 &lt; n)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (p1 == m)</span><br><span class="line">            &#123;</span><br><span class="line">                cur = nums2[p2++];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (p2 == n)</span><br><span class="line">            &#123;</span><br><span class="line">                cur = nums1[p1++];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (nums1[p1] &lt; nums2[p2])</span><br><span class="line">            &#123;</span><br><span class="line">                cur = nums1[p1++];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                cur = nums2[p2++];</span><br><span class="line">            &#125;</span><br><span class="line">            sorted[p1 + p2 - <span class="number">1</span>] = cur;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; m + n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            nums1[i] = sorted[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//逆向双指针</span></span><br><span class="line">    <span class="comment">//时间复杂度：O(m+n)</span></span><br><span class="line">    <span class="comment">//空间复杂度：O(1)</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">merge3</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums1, <span class="type">int</span> m, vector&lt;<span class="type">int</span>&gt; &amp;nums2, <span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> p1 = m - <span class="number">1</span>, p2 = n - <span class="number">1</span>; <span class="comment">//指针指向数组的最后一个元素</span></span><br><span class="line">        <span class="type">int</span> cur;</span><br><span class="line">        <span class="type">int</span> tail = m + n <span class="number">-1</span>; <span class="comment">//指向合并后数组最后一个位置</span></span><br><span class="line">        <span class="keyword">while</span>(p1 &gt;= <span class="number">0</span> || p2 &gt;= <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(p1 == <span class="number">-1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                cur = nums2[p2--];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(p2 == <span class="number">-1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                cur = nums1[p1--];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (nums1[p1] &lt; nums2[p2])</span><br><span class="line">            &#123;</span><br><span class="line">                cur = nums2[p2--];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                cur = nums1[p1--];</span><br><span class="line">            &#125;</span><br><span class="line">            nums1[tail--] = cur;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">int</span> val)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; val &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; nums1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; nums2 = &#123;<span class="number">2</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line">    Solution s;</span><br><span class="line">    s.<span class="built_in">merge3</span>(nums1, <span class="number">3</span>, nums2, <span class="number">3</span>);</span><br><span class="line">    for_each(nums1.<span class="built_in">begin</span>(), nums1.<span class="built_in">end</span>(), print);</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// @lc code=end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+<p><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/image.3jzjgymwaay0.webp" alt="tupian"></p>
+]]></content>
       <categories>
-        <category>数据结构</category>
+        <category>Ubuntu</category>
       </categories>
       <tags>
-        <tag>leetcode</tag>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TCP通信</title>
+    <url>/2022/10/25/TCP%E9%80%9A%E4%BF%A1/</url>
+    <content><![CDATA[<h3 id="TCP通信"><a href="#TCP通信" class="headerlink" title="TCP通信"></a>TCP通信</h3><h4 id="1、图示"><a href="#1、图示" class="headerlink" title="1、图示"></a>1、图示</h4><ul>
+<li><strong>TCP三次握手-四次挥手</strong><img src="https://cdn.staticaly.com/gh/muhui00/image-hosting@master/TCP三次握手-四次挥手.6j1wx5gexwo0.webp" alt="TCP三次握手-四次挥手" style="zoom: 80%;" />
+#### 2、重要字段</li>
+<li>seq：（sequence number）序号</li>
+<li>ack：（acknowledgement number）确认号</li>
+<li>标志位：<ul>
+<li>SYN ：(SYNchronization）同步</li>
+<li>ACK ：(ACKnowlegment）确认</li>
+<li>FIN   :（FINish）终止<h4 id="3、三次握手过程"><a href="#3、三次握手过程" class="headerlink" title="3、三次握手过程"></a>3、三次握手过程</h4></li>
+</ul>
+</li>
+</ul>
+<ol>
+<li><p>首先客户端先向服务器端发送一个TCP报文</p>
+<ul>
+<li>标记位为SYN，表示“请求建立新连接”;</li>
+<li>序号为Seq&#x3D;X（X一般为1）（传输信息的时候每个数据包的序号)；</li>
+<li>随后客户端进入SYN-SENT阶段（请求连接的阶段）；</li>
+</ul>
+</li>
+<li><p>服务器端收到来自客户端的TCP报文之后,结束LISTEN阶段。并返回一段报文</p>
+<ul>
+<li>标志位为SYN和ACK，表示“确认客户端的报文Seq序号有效，服务器能正常接收客户端发送的数据，并同意创建新连接”（即告诉客户端，服务器收到了你的数据）；</li>
+<li>序号为Seq&#x3D;y；（返回一个收到信息的数据包 并给其标序号为y）</li>
+<li>确认号为Ack&#x3D;x+1，表示收到客户端的序号Seq并将其值加1作为自己确认号Ack的值（两端配对接收到消息 并反馈的过程；随后服务器端进入SYN-RCVD阶段。</li>
+<li>ACK:代表确认收到消息</li>
+</ul>
+</li>
+<li><p>客户端接收到来自服务器确认收到数据的TCP报文后，明确了从客户端到服务器的数据传输是正常的，结束SYN-SENT阶段，并返回一段TCP报文</p>
+<ul>
+<li>标志位为ACK，表示“确认收到服务器端同意连接的信号”（即告诉服务器，我知道你收到我发的数据了）；</li>
+<li>序号为Seq&#x3D;x+1，表示收到服务器端的确认号Ack，并将其值作为自己的序号值；</li>
+<li>确认号为Ack&#x3D;y+1，表示收到服务器端序号Seq，并将其值加1作为自己的确认号Ack的值；</li>
+<li>随后客户端进入ESTABLISHED阶段。（即成功建立了连接）<h4 id="4、四次挥手过程"><a href="#4、四次挥手过程" class="headerlink" title="4、四次挥手过程"></a>4、四次挥手过程</h4>  由于TCP连接是全双工的，因此，每个方向都必须要单独进行关闭。这一原则是当一方完成数据发送任务后，发送一个FIN来终止这一方向的连接，收到一个FIN只是意味着这一方向上没有数据流动了，即不会再收到数据了。但是在这个TCP连接上仍然能够发送数据，直到另一方向也发送了FIN。首先进行关闭的一方将执行主动关闭，而另一方则执行被动关闭。</li>
+</ul>
+</li>
+<li><p>Client发送一个FIN，以及选择号seq&#x3D;u（表示：u之前的数据已经全部发送，并且数据发到u就可以截止了，就不再有数据了），用来关闭Client到Server的数据传送。Client进入FIN_WAIT_1状态。</p>
+</li>
+<li><p>Server收到FIN后，发送一个请求号seq&#x3D;v和确认序号ack&#x3D;u+1给Client。Server进入CLOSE_WAIT状态。</p>
+</li>
+<li><p>Server发送一个FIN，请求号为最新的seq&#x3D;w和确认序号ack&#x3D;u+1，用来关闭Server到Client的数据传送。Server进入LAST_ACK状态。</p>
+</li>
+<li><p>Client收到FIN后，Client进入TIME_WAIT状态，接着发送一个ACK给Server，确认序号为w+1。Server进入CLOSED状态，完成四次挥手。</p>
+</li>
+</ol>
+<h3 id="TCP滑动窗口"><a href="#TCP滑动窗口" class="headerlink" title="TCP滑动窗口"></a>TCP滑动窗口</h3><h4 id="1、图示-1"><a href="#1、图示-1" class="headerlink" title="1、图示"></a>1、图示</h4><p><img src="https://cdn.staticaly.com/gh/muhui00/image-hosting@master/TCP%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3.1jz2ylthq44g.webp" alt="TCP滑动窗口"></p>
+<h4 id="2、过程"><a href="#2、过程" class="headerlink" title="2、过程"></a>2、过程</h4><ol>
+<li><pre><code>发送端发起连接，声明最大段尺寸是1460，初始序号是0，窗口大小是4K，表示“我的接收缓冲区还有4K字节空闲，你发的数据不要超过4K”。接收端应答连接请求，声明最大段尺寸是1024，初始序号是8000，窗口大小是6K。发送端应答，三方握手结束。
+</code></pre>
+</li>
+<li><pre><code>发送端发出段4-9，每个段带1K的数据，发送端根据窗口大小知道接收端的缓冲区满了，因此停止发送数据。
+</code></pre>
+</li>
+<li><pre><code>接收端的应用程序提走2K数据，接收缓冲区又有了2K空闲，接收端发出段10，在应答已收到6K数据的同时声明窗口大小为2K。
+</code></pre>
+</li>
+<li><pre><code>接收端的应用程序又提走2K数据，接收缓冲区有4K空闲，接收端发出段11，重新声明窗口大小为4K。
+</code></pre>
+</li>
+<li><pre><code>发送端发出段12-13，每个段带2K数据，段13同时还包含FIN位。
+</code></pre>
+</li>
+<li><pre><code>接收端应答接收到的2K数据（6145-8192），再加上FIN位占一个序号8193，因此应答序号是8194，连接处于半关闭状态，接收端同时声明窗口大小为2K。
+</code></pre>
+</li>
+<li><pre><code>接收端的应用程序提走2K数据，接收端重新声明窗口大小为4K。
+</code></pre>
+</li>
+<li><pre><code>接收端的应用程序提走剩下的2K数据，接收缓冲区全空，接收端重新声明窗口大小为6K。
+</code></pre>
+</li>
+<li><pre><code>接收端的应用程序在提走全部数据后，决定关闭连接，发出段17包含FIN位，发送端应答，连接完全关闭。
+</code></pre>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>网络编程</category>
+      </categories>
+      <tags>
+        <tag>TCP</tag>
       </tags>
   </entry>
   <entry>
@@ -323,27 +383,18 @@
       </tags>
   </entry>
   <entry>
-    <title>leetcode_day4</title>
-    <url>/2022/10/19/leetcode-day4/</url>
-    <content><![CDATA[<h3 id="有效的数独"><a href="#有效的数独" class="headerlink" title="有效的数独"></a>有效的数独</h3><p>题目描述<br>请你判断一个 9 x 9 的数独是否有效。只需要 根据以下规则 ，验证已经填入的数字是否有效即可。</p>
-<ol>
-<li>数字 1-9 在每一行只能出现一次。</li>
-<li>数字 1-9 在每一列只能出现一次。</li>
-<li>数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。（请参考示例图）</li>
-</ol>
-<p><strong>注意</strong></p>
-<ul>
-<li>一个有效的数独（部分已被填充）不一定是可解的。</li>
-<li>只需要根据以上规则，验证已经填入的数字是否有效即可。</li>
-<li>空白格用 ‘.’ 表示。</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/250px-sudoku-by-l2g-20050714svg.11g34v5akffk.webp" alt="图片"></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @lc app=leetcode.cn id=36 lang=cpp</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * [36] 有效的数独</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// @lc code=start</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValidSudoku</span><span class="params">(vector&lt;vector&lt;<span class="type">char</span>&gt;&gt; &amp;board)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> rows[<span class="number">9</span>][<span class="number">9</span>];        <span class="comment">//保存行中数字1-9出现的次数</span></span><br><span class="line">        <span class="type">int</span> colomns[<span class="number">9</span>][<span class="number">9</span>];     <span class="comment">//保存列中数字1-9出现的次数</span></span><br><span class="line">        <span class="type">int</span> subboxes[<span class="number">3</span>][<span class="number">3</span>][<span class="number">9</span>]; <span class="comment">//保存3*3矩阵中数字1-9出现的次数</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//初始化矩阵</span></span><br><span class="line">        <span class="built_in">memset</span>(rows, <span class="number">0</span>, <span class="built_in">sizeof</span>(rows));</span><br><span class="line">        <span class="built_in">memset</span>(colomns, <span class="number">0</span>, <span class="built_in">sizeof</span>(colomns));</span><br><span class="line">        <span class="built_in">memset</span>(subboxes, <span class="number">0</span>, <span class="built_in">sizeof</span>(subboxes));</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="type">char</span> c;</span><br><span class="line">        <span class="comment">//遍历循环9*9矩阵，保存数字1-9出现的次数</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">9</span>; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                c = board[i][j];</span><br><span class="line">                <span class="keyword">if</span> (c != <span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    index = c - <span class="string">&#x27;0&#x27;</span> - <span class="number">1</span>;</span><br><span class="line">                    <span class="comment">//可以理解为一个长度为9的一维数组，顺序保存1-9数字出现的次数</span></span><br><span class="line">                    rows[i][index]++;</span><br><span class="line">                    colomns[j][index]++;</span><br><span class="line">                    <span class="comment">//可以理解为一个3*3的矩阵，顺序保存1-9数字出现的次数</span></span><br><span class="line">                    subboxes[i / <span class="number">3</span>][j / <span class="number">3</span>][index]++;</span><br><span class="line">                    <span class="comment">//每个数字记录次数超过1，return false</span></span><br><span class="line">                    <span class="keyword">if</span> (rows[i][index] &gt; <span class="number">1</span> || colomns[j][index] &gt; <span class="number">1</span> || subboxes[i / <span class="number">3</span>][j / <span class="number">3</span>][index] &gt; <span class="number">1</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// @lc code=end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    <title>leetcode_day2</title>
+    <url>/2022/10/17/leetcode-day2/</url>
+    <content><![CDATA[<h3 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1 两数之和"></a>1 两数之和</h3><p><strong>题目描述</strong><br>    给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那两个整数，并返回它们的数组下标。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//暴力遍历</span></span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums, <span class="type">int</span> target)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> len = (<span class="type">int</span>)nums.<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; s;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len - <span class="number">1</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; len; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[i] + nums[j] == target)</span><br><span class="line">                &#123;</span><br><span class="line">                    s.<span class="built_in">push_back</span>(i);</span><br><span class="line">                    s.<span class="built_in">push_back</span>(j);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//哈希表</span></span><br><span class="line">    <span class="comment">//使用哈希表，可以将寻找 target - x 的时间复杂度降低到从 O(N)降低到O(1)。这样     我们创建一个哈希表，对于每一个 x，我们首先查询哈希表中是否存在target - x，然后将     x 插入到哈希表中，即可保证不会让 x 和自己匹配。</span></span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum_hash</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums, <span class="type">int</span> target)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// key : nums[], value : i</span></span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; hash;</span><br><span class="line">        <span class="type">int</span> len = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//迭代查找</span></span><br><span class="line">            <span class="keyword">auto</span> it = hash.<span class="built_in">find</span>(target - nums[i]);</span><br><span class="line">            <span class="keyword">if</span> (it != hash.<span class="built_in">end</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> &#123;it-&gt;second, i&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//循环插入</span></span><br><span class="line">            hash[nums[i]] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; nums = &#123;<span class="number">3</span>, <span class="number">2</span>, <span class="number">4</span>&#125;;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; result;</span><br><span class="line">    <span class="type">int</span> target = <span class="number">6</span>;</span><br><span class="line">    Solution s;</span><br><span class="line">    result = s.<span class="built_in">twoSum</span>(nums, target);</span><br><span class="line">    cout &lt;&lt; result[<span class="number">0</span>] &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; result[<span class="number">1</span>] &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-合并两个有序数组"><a href="#2-合并两个有序数组" class="headerlink" title="2 合并两个有序数组"></a>2 合并两个有序数组</h3><p><strong>题目描述</strong><br>    给你两个按 非递减顺序 排列的整数数组 nums1 和 nums2，另有两个整数 m 和 n ，分别表示 nums1 和 nums2 中的元素数目。<br>    请你合并 nums2 到 nums1 中，使合并后的数组同样按 非递减顺序排列。<br><strong>注意</strong>：最终，合并后数组不应由函数返回，而是存储在数组 nums1 中。为了应对这种情况，nums1 的初始长度为 m + n，其中前 m 个元素表示应合并的元素，后 n 个元素为 0 ，应忽略。nums2 的长度为 n 。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @lc app=leetcode.cn id=88 lang=cpp</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * [88] 合并两个有序数组</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// @lc code=start</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//直接合并后排序</span></span><br><span class="line">    <span class="comment">//时间复杂度：O((m+n)log(m+n))</span></span><br><span class="line">    <span class="comment">//空间复杂度：O(log(m+n))</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums1, <span class="type">int</span> m, vector&lt;<span class="type">int</span>&gt; &amp;nums2, <span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            nums1[m + i] = nums2[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sort</span>(nums1.<span class="built_in">begin</span>(), nums1.<span class="built_in">end</span>());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//双指针</span></span><br><span class="line">    <span class="comment">//时间复杂度：O(m+n)</span></span><br><span class="line">    <span class="comment">//空间复杂度：O(m+n)</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">merge2</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums1, <span class="type">int</span> m, vector&lt;<span class="type">int</span>&gt; &amp;nums2, <span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> p1 = <span class="number">0</span>, p2 = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> sorted[m + n];</span><br><span class="line">        <span class="type">int</span> cur;</span><br><span class="line">        <span class="keyword">while</span> (p1 &lt; m || p2 &lt; n)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (p1 == m)</span><br><span class="line">            &#123;</span><br><span class="line">                cur = nums2[p2++];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (p2 == n)</span><br><span class="line">            &#123;</span><br><span class="line">                cur = nums1[p1++];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (nums1[p1] &lt; nums2[p2])</span><br><span class="line">            &#123;</span><br><span class="line">                cur = nums1[p1++];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                cur = nums2[p2++];</span><br><span class="line">            &#125;</span><br><span class="line">            sorted[p1 + p2 - <span class="number">1</span>] = cur;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; m + n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            nums1[i] = sorted[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//逆向双指针</span></span><br><span class="line">    <span class="comment">//时间复杂度：O(m+n)</span></span><br><span class="line">    <span class="comment">//空间复杂度：O(1)</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">merge3</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums1, <span class="type">int</span> m, vector&lt;<span class="type">int</span>&gt; &amp;nums2, <span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> p1 = m - <span class="number">1</span>, p2 = n - <span class="number">1</span>; <span class="comment">//指针指向数组的最后一个元素</span></span><br><span class="line">        <span class="type">int</span> cur;</span><br><span class="line">        <span class="type">int</span> tail = m + n <span class="number">-1</span>; <span class="comment">//指向合并后数组最后一个位置</span></span><br><span class="line">        <span class="keyword">while</span>(p1 &gt;= <span class="number">0</span> || p2 &gt;= <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(p1 == <span class="number">-1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                cur = nums2[p2--];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(p2 == <span class="number">-1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                cur = nums1[p1--];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (nums1[p1] &lt; nums2[p2])</span><br><span class="line">            &#123;</span><br><span class="line">                cur = nums2[p2--];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                cur = nums1[p1--];</span><br><span class="line">            &#125;</span><br><span class="line">            nums1[tail--] = cur;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">int</span> val)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; val &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; nums1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; nums2 = &#123;<span class="number">2</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line">    Solution s;</span><br><span class="line">    s.<span class="built_in">merge3</span>(nums1, <span class="number">3</span>, nums2, <span class="number">3</span>);</span><br><span class="line">    for_each(nums1.<span class="built_in">begin</span>(), nums1.<span class="built_in">end</span>(), print);</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// @lc code=end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>leetcode</category>
+        <category>数据结构</category>
       </categories>
       <tags>
-        <tag>有效的数独</tag>
+        <tag>leetcode</tag>
       </tags>
   </entry>
   <entry>
@@ -373,6 +424,30 @@
       </categories>
       <tags>
         <tag>递归</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leetcode_day4</title>
+    <url>/2022/10/19/leetcode-day4/</url>
+    <content><![CDATA[<h3 id="有效的数独"><a href="#有效的数独" class="headerlink" title="有效的数独"></a>有效的数独</h3><p>题目描述<br>请你判断一个 9 x 9 的数独是否有效。只需要 根据以下规则 ，验证已经填入的数字是否有效即可。</p>
+<ol>
+<li>数字 1-9 在每一行只能出现一次。</li>
+<li>数字 1-9 在每一列只能出现一次。</li>
+<li>数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。（请参考示例图）</li>
+</ol>
+<p><strong>注意</strong></p>
+<ul>
+<li>一个有效的数独（部分已被填充）不一定是可解的。</li>
+<li>只需要根据以上规则，验证已经填入的数字是否有效即可。</li>
+<li>空白格用 ‘.’ 表示。</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/250px-sudoku-by-l2g-20050714svg.11g34v5akffk.webp" alt="图片"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @lc app=leetcode.cn id=36 lang=cpp</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * [36] 有效的数独</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// @lc code=start</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValidSudoku</span><span class="params">(vector&lt;vector&lt;<span class="type">char</span>&gt;&gt; &amp;board)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> rows[<span class="number">9</span>][<span class="number">9</span>];        <span class="comment">//保存行中数字1-9出现的次数</span></span><br><span class="line">        <span class="type">int</span> colomns[<span class="number">9</span>][<span class="number">9</span>];     <span class="comment">//保存列中数字1-9出现的次数</span></span><br><span class="line">        <span class="type">int</span> subboxes[<span class="number">3</span>][<span class="number">3</span>][<span class="number">9</span>]; <span class="comment">//保存3*3矩阵中数字1-9出现的次数</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//初始化矩阵</span></span><br><span class="line">        <span class="built_in">memset</span>(rows, <span class="number">0</span>, <span class="built_in">sizeof</span>(rows));</span><br><span class="line">        <span class="built_in">memset</span>(colomns, <span class="number">0</span>, <span class="built_in">sizeof</span>(colomns));</span><br><span class="line">        <span class="built_in">memset</span>(subboxes, <span class="number">0</span>, <span class="built_in">sizeof</span>(subboxes));</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="type">char</span> c;</span><br><span class="line">        <span class="comment">//遍历循环9*9矩阵，保存数字1-9出现的次数</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">9</span>; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                c = board[i][j];</span><br><span class="line">                <span class="keyword">if</span> (c != <span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    index = c - <span class="string">&#x27;0&#x27;</span> - <span class="number">1</span>;</span><br><span class="line">                    <span class="comment">//可以理解为一个长度为9的一维数组，顺序保存1-9数字出现的次数</span></span><br><span class="line">                    rows[i][index]++;</span><br><span class="line">                    colomns[j][index]++;</span><br><span class="line">                    <span class="comment">//可以理解为一个3*3的矩阵，顺序保存1-9数字出现的次数</span></span><br><span class="line">                    subboxes[i / <span class="number">3</span>][j / <span class="number">3</span>][index]++;</span><br><span class="line">                    <span class="comment">//每个数字记录次数超过1，return false</span></span><br><span class="line">                    <span class="keyword">if</span> (rows[i][index] &gt; <span class="number">1</span> || colomns[j][index] &gt; <span class="number">1</span> || subboxes[i / <span class="number">3</span>][j / <span class="number">3</span>][index] &gt; <span class="number">1</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// @lc code=end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>有效的数独</tag>
       </tags>
   </entry>
   <entry>
@@ -423,6 +498,17 @@
       </categories>
       <tags>
         <tag>log</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leetcode_day8</title>
+    <url>/2022/10/26/leetcode-day8/</url>
+    <content><![CDATA[<h3 id="二叉树的后序遍历（迭代写法）"><a href="#二叉树的后序遍历（迭代写法）" class="headerlink" title="二叉树的后序遍历（迭代写法）"></a>二叉树的后序遍历（迭代写法）</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @lc app=leetcode.cn id=145 lang=cpp</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * [145] 二叉树的后序遍历</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// @lc code=start</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">TreeNode</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> val;</span><br><span class="line">    TreeNode *left;</span><br><span class="line">    TreeNode *right;</span><br><span class="line">    <span class="built_in">TreeNode</span>() : <span class="built_in">val</span>(<span class="number">0</span>), <span class="built_in">left</span>(<span class="literal">nullptr</span>), <span class="built_in">right</span>(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">    <span class="built_in">TreeNode</span>(<span class="type">int</span> x) : <span class="built_in">val</span>(x), <span class="built_in">left</span>(<span class="literal">nullptr</span>), <span class="built_in">right</span>(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">    <span class="built_in">TreeNode</span>(<span class="type">int</span> x, TreeNode *left, TreeNode *right) : <span class="built_in">val</span>(x), <span class="built_in">left</span>(left), <span class="built_in">right</span>(right) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//迭代</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">postorder</span><span class="params">(TreeNode *root, vector&lt;<span class="type">int</span>&gt; &amp;res)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">        stack&lt;TreeNode *&gt; stk;</span><br><span class="line">        <span class="comment">//记录历史访问节点</span></span><br><span class="line">        TreeNode *prev = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">while</span> (!stk.<span class="built_in">empty</span>() || root != <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span> (root != <span class="literal">nullptr</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                stk.<span class="built_in">emplace</span>(root);</span><br><span class="line">                root = root-&gt;left;</span><br><span class="line">            &#125;</span><br><span class="line">            root = stk.<span class="built_in">top</span>();</span><br><span class="line">            stk.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="keyword">if</span> (root-&gt;right == <span class="literal">nullptr</span> || root-&gt;right == prev)</span><br><span class="line">            &#123;</span><br><span class="line">                res.<span class="built_in">emplace_back</span>(root-&gt;val);</span><br><span class="line">                prev = root;</span><br><span class="line">                root = <span class="literal">nullptr</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                stk.<span class="built_in">emplace</span>(root);</span><br><span class="line">                root = root-&gt;right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// @lc code=end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>二叉树</tag>
       </tags>
   </entry>
   <entry>
