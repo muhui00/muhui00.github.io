@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-10-26T11:41:08.787Z</updated>
+  <updated>2022-11-01T15:00:08.417Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>有关fd泄露的调试方法</title>
+    <link href="http://example.com/2022/11/01/%E6%9C%89%E5%85%B3fd%E6%B3%84%E9%9C%B2%E7%9A%84%E8%B0%83%E8%AF%95%E6%96%B9%E6%B3%95/"/>
+    <id>http://example.com/2022/11/01/%E6%9C%89%E5%85%B3fd%E6%B3%84%E9%9C%B2%E7%9A%84%E8%B0%83%E8%AF%95%E6%96%B9%E6%B3%95/</id>
+    <published>2022-11-01T14:10:40.000Z</published>
+    <updated>2022-11-01T15:00:08.417Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="有关fd泄露的调试方法"><a href="#有关fd泄露的调试方法" class="headerlink" title="有关fd泄露的调试方法"></a>有关fd泄露的调试方法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看全部进程</span></span><br><span class="line">ps aux</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看name进程</span></span><br><span class="line">ps aux | grep &quot;name&quot;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看name进程（忽略grep命令本身）</span></span><br><span class="line">ps aux | grep &quot;name&quot; | grep -v &quot;grep&quot;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">得到当前进程号（可以后台一直执行该命令，并将该进程的进程号放在一个管理表中管理，监控其是否消失，消失则重启该进程--》看门狗）</span></span><br><span class="line">ps aux | grep &quot;name&quot; | grep -v &quot;grep&quot; | awk &#x27;&#123;print $2&#125;&#x27;</span><br></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">该目录存放当前系统正在运行的进程</span></span><br><span class="line">cd /proc/</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">进入某个进程目录，此目录存放着该进程所有的状态</span></span><br><span class="line">cd 1</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">此目录存放该进程所打开的文件描述符</span></span><br><span class="line">cd fd</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看文件描述符</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">可以通过监控某个进程的文件描述符是否有异常增长来调试fd的泄露情况</span></span><br><span class="line">ls</span><br></pre></td></tr></table></figure><p><img src="https://cdn.staticaly.com/gh/muhui00/image-hosting@master/proc.5hizkvtmu140.webp" alt="proc"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;有关fd泄露的调试方法&quot;&gt;&lt;a href=&quot;#有关fd泄露的调试方法&quot; class=&quot;headerlink&quot; title=&quot;有关fd泄露的调试方法&quot;&gt;&lt;/a&gt;有关fd泄露的调试方法&lt;/h3&gt;&lt;figure class=&quot;highlight shell&quot;&gt;&lt;tabl</summary>
+      
+    
+    
+    
+    
+    <category term="linux调试" scheme="http://example.com/tags/linux%E8%B0%83%E8%AF%95/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode_day8</title>
