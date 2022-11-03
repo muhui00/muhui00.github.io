@@ -49,48 +49,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Protobuf报错修正</title>
-    <url>/2022/04/19/Protobuf%E6%8A%A5%E9%94%99%E4%BF%AE%E6%AD%A3/</url>
-    <content><![CDATA[<p>​	今天在VS使用Linux远程编译项目代码的时候，Linux编译报错，查看错误提示发现是提示Linux下Protobuf版本有问题。</p>
-<p>​	查看windows下的Protobuf的版本为 <code>libprotoc 3.8.0</code>；</p>
-<p>​	查看Linux下的Protobuf的版本为 <code>libprotoc 3.13.0</code>；</p>
-<p>​	我是在windows下编译<code>.proto</code>文件生成的<code>C++</code>类，版本低于Linux下的环境，导致编译的时候版本不兼容。</p>
-<p>解决办法</p>
-<ol>
-<li>​	更新windows下的Protubuf版本与Linux下的一致，重新编译<code>.proto</code>文件，并且替换项目中的<code>C++</code>类。</li>
-<li>​	将Linux下的Protobuf版本替换为window下的版本，直接编译项目即可。</li>
-</ol>
-<p>我是替换的Linux下的Protobuf版本。</p>
-<h4 id="Linux下Protobuf替换版本的步骤"><a href="#Linux下Protobuf替换版本的步骤" class="headerlink" title="Linux下Protobuf替换版本的步骤"></a>Linux下Protobuf替换版本的步骤</h4><ol>
-<li>​	卸载</li>
-</ol>
-<p>​			<code>sudo apt-get remove libprotobuf-dev</code></p>
-<ol start="2">
-<li>​	删除路径</li>
-</ol>
-<p>​			<code>which protoc</code>查看路径，然后将其删除即可。</p>
-<ol start="3">
-<li>​	安装</li>
-</ol>
-<ul>
-<li><p>下载源码安装包: <code>protobuf-cpp-3.8.0.tar.gz</code></p>
-</li>
-<li><p>解压缩</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">tar zxvf protobuf-cpp-3.8.0.tar.gz</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装 -&gt; 进入到解压目录</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> protobuf-3.8.0</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./configure</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make check	(可选)</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo make install</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>版本替换完成之后成功解决问题。<br><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/image.7bvx6pc5xb40.webp" alt="图片"></p>
-]]></content>
-      <categories>
-        <category>Protobuf</category>
-      </categories>
-      <tags>
-        <tag>Protobuf</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>C++内存池</title>
     <url>/2022/11/02/C++%E5%86%85%E5%AD%98%E6%B1%A0/</url>
     <content><![CDATA[<h4 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h4><ol>
@@ -132,111 +90,45 @@
       </tags>
   </entry>
   <entry>
-    <title>TCP通信</title>
-    <url>/2022/10/25/TCP%E9%80%9A%E4%BF%A1/</url>
-    <content><![CDATA[<h3 id="TCP通信"><a href="#TCP通信" class="headerlink" title="TCP通信"></a>TCP通信</h3><h4 id="1、图示"><a href="#1、图示" class="headerlink" title="1、图示"></a>1、图示</h4><p><strong>TCP三次握手-四次挥手</strong><br><img src="https://cdn.staticaly.com/gh/muhui00/image-hosting@master/TCP三次握手-四次挥手.6j1wx5gexwo0.webp" alt="TCP三次握手-四次挥手" style="zoom: 80%;" /></p>
-<h4 id="2、重要字段"><a href="#2、重要字段" class="headerlink" title="2、重要字段"></a>2、重要字段</h4><ul>
-<li>seq：（sequence number）序号</li>
-<li>ack：（acknowledgement number）确认号</li>
-<li>标志位：<ul>
-<li>SYN ：(SYNchronization）同步</li>
-<li>ACK ：(ACKnowlegment）确认</li>
-<li>FIN   :（FINish）终止<h4 id="3、三次握手过程"><a href="#3、三次握手过程" class="headerlink" title="3、三次握手过程"></a>3、三次握手过程</h4></li>
-</ul>
-</li>
-</ul>
+    <title>Protobuf报错修正</title>
+    <url>/2022/04/19/Protobuf%E6%8A%A5%E9%94%99%E4%BF%AE%E6%AD%A3/</url>
+    <content><![CDATA[<p>​	今天在VS使用Linux远程编译项目代码的时候，Linux编译报错，查看错误提示发现是提示Linux下Protobuf版本有问题。</p>
+<p>​	查看windows下的Protobuf的版本为 <code>libprotoc 3.8.0</code>；</p>
+<p>​	查看Linux下的Protobuf的版本为 <code>libprotoc 3.13.0</code>；</p>
+<p>​	我是在windows下编译<code>.proto</code>文件生成的<code>C++</code>类，版本低于Linux下的环境，导致编译的时候版本不兼容。</p>
+<p>解决办法</p>
 <ol>
-<li><p>首先客户端先向服务器端发送一个TCP报文</p>
-<ul>
-<li>标记位为SYN，表示“请求建立新连接”;</li>
-<li>序号为Seq&#x3D;X（X一般为1）（传输信息的时候每个数据包的序号)；</li>
-<li>随后客户端进入SYN-SENT阶段（请求连接的阶段）；</li>
-</ul>
-</li>
-<li><p>服务器端收到来自客户端的TCP报文之后,结束LISTEN阶段。并返回一段报文</p>
-<ul>
-<li>标志位为SYN和ACK，表示“确认客户端的报文Seq序号有效，服务器能正常接收客户端发送的数据，并同意创建新连接”（即告诉客户端，服务器收到了你的数据）；</li>
-<li>序号为Seq&#x3D;y；（返回一个收到信息的数据包 并给其标序号为y）</li>
-<li>确认号为Ack&#x3D;x+1，表示收到客户端的序号Seq并将其值加1作为自己确认号Ack的值（两端配对接收到消息 并反馈的过程；随后服务器端进入SYN-RCVD阶段。</li>
-<li>ACK:代表确认收到消息</li>
-</ul>
-</li>
-<li><p>客户端接收到来自服务器确认收到数据的TCP报文后，明确了从客户端到服务器的数据传输是正常的，结束SYN-SENT阶段，并返回一段TCP报文</p>
-<ul>
-<li>标志位为ACK，表示“确认收到服务器端同意连接的信号”（即告诉服务器，我知道你收到我发的数据了）；</li>
-<li>序号为Seq&#x3D;x+1，表示收到服务器端的确认号Ack，并将其值作为自己的序号值；</li>
-<li>确认号为Ack&#x3D;y+1，表示收到服务器端序号Seq，并将其值加1作为自己的确认号Ack的值；</li>
-<li>随后客户端进入ESTABLISHED阶段。（即成功建立了连接）<h4 id="4、四次挥手过程"><a href="#4、四次挥手过程" class="headerlink" title="4、四次挥手过程"></a>4、四次挥手过程</h4>  由于TCP连接是全双工的，因此，每个方向都必须要单独进行关闭。这一原则是当一方完成数据发送任务后，发送一个FIN来终止这一方向的连接，收到一个FIN只是意味着这一方向上没有数据流动了，即不会再收到数据了。但是在这个TCP连接上仍然能够发送数据，直到另一方向也发送了FIN。首先进行关闭的一方将执行主动关闭，而另一方则执行被动关闭。</li>
-</ul>
-</li>
-<li><p>Client发送一个FIN，以及选择号seq&#x3D;u（表示：u之前的数据已经全部发送，并且数据发到u就可以截止了，就不再有数据了），用来关闭Client到Server的数据传送。Client进入FIN_WAIT_1状态。</p>
-</li>
-<li><p>Server收到FIN后，发送一个请求号seq&#x3D;v和确认序号ack&#x3D;u+1给Client。Server进入CLOSE_WAIT状态。</p>
-</li>
-<li><p>Server发送一个FIN，请求号为最新的seq&#x3D;w和确认序号ack&#x3D;u+1，用来关闭Server到Client的数据传送。Server进入LAST_ACK状态。</p>
-</li>
-<li><p>Client收到FIN后，Client进入TIME_WAIT状态，接着发送一个ACK给Server，确认序号为w+1。Server进入CLOSED状态，完成四次挥手。</p>
-</li>
+<li>​	更新windows下的Protubuf版本与Linux下的一致，重新编译<code>.proto</code>文件，并且替换项目中的<code>C++</code>类。</li>
+<li>​	将Linux下的Protobuf版本替换为window下的版本，直接编译项目即可。</li>
 </ol>
-<h3 id="TCP滑动窗口"><a href="#TCP滑动窗口" class="headerlink" title="TCP滑动窗口"></a>TCP滑动窗口</h3><h4 id="1、图示-1"><a href="#1、图示-1" class="headerlink" title="1、图示"></a>1、图示</h4><p><img src="https://cdn.staticaly.com/gh/muhui00/image-hosting@master/TCP%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3.1jz2ylthq44g.webp" alt="TCP滑动窗口"></p>
-<h4 id="2、过程"><a href="#2、过程" class="headerlink" title="2、过程"></a>2、过程</h4><ol>
-<li><pre><code>发送端发起连接，声明最大段尺寸是1460，初始序号是0，窗口大小是4K，表示“我的接收缓冲区还有4K字节空闲，你发的数据不要超过4K”。接收端应答连接请求，声明最大段尺寸是1024，初始序号是8000，窗口大小是6K。发送端应答，三方握手结束。
-</code></pre>
-</li>
-<li><pre><code>发送端发出段4-9，每个段带1K的数据，发送端根据窗口大小知道接收端的缓冲区满了，因此停止发送数据。
-</code></pre>
-</li>
-<li><pre><code>接收端的应用程序提走2K数据，接收缓冲区又有了2K空闲，接收端发出段10，在应答已收到6K数据的同时声明窗口大小为2K。
-</code></pre>
-</li>
-<li><pre><code>接收端的应用程序又提走2K数据，接收缓冲区有4K空闲，接收端发出段11，重新声明窗口大小为4K。
-</code></pre>
-</li>
-<li><pre><code>发送端发出段12-13，每个段带2K数据，段13同时还包含FIN位。
-</code></pre>
-</li>
-<li><pre><code>接收端应答接收到的2K数据（6145-8192），再加上FIN位占一个序号8193，因此应答序号是8194，连接处于半关闭状态，接收端同时声明窗口大小为2K。
-</code></pre>
-</li>
-<li><pre><code>接收端的应用程序提走2K数据，接收端重新声明窗口大小为4K。
-</code></pre>
-</li>
-<li><pre><code>接收端的应用程序提走剩下的2K数据，接收缓冲区全空，接收端重新声明窗口大小为6K。
-</code></pre>
-</li>
-<li><pre><code>接收端的应用程序在提走全部数据后，决定关闭连接，发出段17包含FIN位，发送端应答，连接完全关闭。
-</code></pre>
-</li>
+<p>我是替换的Linux下的Protobuf版本。</p>
+<h4 id="Linux下Protobuf替换版本的步骤"><a href="#Linux下Protobuf替换版本的步骤" class="headerlink" title="Linux下Protobuf替换版本的步骤"></a>Linux下Protobuf替换版本的步骤</h4><ol>
+<li>​	卸载</li>
 </ol>
+<p>​			<code>sudo apt-get remove libprotobuf-dev</code></p>
+<ol start="2">
+<li>​	删除路径</li>
+</ol>
+<p>​			<code>which protoc</code>查看路径，然后将其删除即可。</p>
+<ol start="3">
+<li>​	安装</li>
+</ol>
+<ul>
+<li><p>下载源码安装包: <code>protobuf-cpp-3.8.0.tar.gz</code></p>
+</li>
+<li><p>解压缩</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">tar zxvf protobuf-cpp-3.8.0.tar.gz</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装 -&gt; 进入到解压目录</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> protobuf-3.8.0</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./configure</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make check	(可选)</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo make install</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>版本替换完成之后成功解决问题。<br><img src="https://cdn.jsdelivr.net/gh/muhui00/image-hosting@master/image.7bvx6pc5xb40.webp" alt="图片"></p>
 ]]></content>
       <categories>
-        <category>网络编程</category>
+        <category>Protobuf</category>
       </categories>
       <tags>
-        <tag>TCP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>leetcode_day1</title>
-    <url>/2022/09/21/leetcode-day1/</url>
-    <content><![CDATA[<h3 id="题目217-存在重复元素"><a href="#题目217-存在重复元素" class="headerlink" title="题目217. 存在重复元素"></a>题目217. 存在重复元素</h3><p><strong>题目描述：</strong>给你一个整数数组 <code>nums</code> 。如果任一值在数组中出现 <strong>至少两次</strong> ，返回 <code>true</code> ；如果数组中每个元素互不相同，返回 <code>false</code> 。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//暴力排序</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">containsDuplicate</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(),nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n<span class="number">-1</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i]==nums[i+<span class="number">1</span>])</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>借助unordered_set容器来判断是否有重复元素，首先对于数组中每个元素都将它插入到哈希表中。如果下次插入插入元素时发现该元素已经存在于哈希表中，则说明存在重复的元素。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//哈希表set</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">containsDuplicate</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        unordered_set&lt;<span class="type">int</span>&gt; us;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> num: nums)&#123;</span><br><span class="line">            <span class="keyword">if</span>(us.<span class="built_in">find</span>(num) != us.<span class="built_in">end</span>()) <span class="comment">//增强for循环</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            us.<span class="built_in">insert</span>(num);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">containsDuplicate</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        set&lt;<span class="type">int</span>&gt; s;</span><br><span class="line">        <span class="type">int</span> len = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">            <span class="keyword">auto</span> it = s.<span class="built_in">find</span>(nums[i]);</span><br><span class="line">            <span class="keyword">if</span>(it != s.<span class="built_in">end</span>())&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            s.<span class="built_in">insert</span>(nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>用unordered_map容器统计每一个元素出现的次数，然后在遍历整个map容器查看是否有元素出现的次数大于等于2。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//哈希表map</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">containsDuplicate</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.<span class="built_in">size</span>()&lt;=<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        unordered_map&lt;<span class="type">int</span>,<span class="type">int</span>&gt; up;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> num: nums)&#123;</span><br><span class="line">            up[num]++;</span><br><span class="line">            <span class="keyword">if</span>(up[num]&gt;=<span class="number">2</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="题目53-最大子数组和"><a href="#题目53-最大子数组和" class="headerlink" title="题目53 最大子数组和"></a>题目53 最大子数组和</h3><p><strong>题目描述：</strong>给你一个整数数组 <code>nums</code> 。请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和 。<strong>子数组</strong> 是数组中的一个连续部分。<br><strong>思路：动态规划</strong><br>状态方程：<code>dp[i] = max(dp[i-1] + nums[i], nums[i])</code></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> INI_MIN -65535</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 1 暴力枚举(超出时间限制)</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxSubArray</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> max = INI_MIN;</span><br><span class="line">        <span class="type">int</span> len = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i; j &lt; len; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                sum += nums[j];</span><br><span class="line">                <span class="keyword">if</span> (sum &gt; max)</span><br><span class="line">                &#123;</span><br><span class="line">                    max = sum;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 2 动态规划</span></span><br><span class="line">    <span class="comment">//状态方程 dp[i] = max(di[i-1]+nums[i],nums[i])</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxSubArray2</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//类似寻找最大最小值的题目，初始值一定要定义成理论上的最小最大值</span></span><br><span class="line">        <span class="type">int</span> result = INI_MIN;</span><br><span class="line">        <span class="type">int</span> len = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// dp[i]表示nums中以nums[i]结尾的最大子序和</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(len)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">        result = dp[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; len; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>] + nums[i], nums[i]);</span><br><span class="line">            result = <span class="built_in">max</span>(result, dp[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//分治法（还没学会）</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>leetcode</tag>
+        <tag>Protobuf</tag>
       </tags>
   </entry>
   <entry>
@@ -408,6 +300,114 @@
       </tags>
   </entry>
   <entry>
+    <title>TCP通信</title>
+    <url>/2022/10/25/TCP%E9%80%9A%E4%BF%A1/</url>
+    <content><![CDATA[<h3 id="TCP通信"><a href="#TCP通信" class="headerlink" title="TCP通信"></a>TCP通信</h3><h4 id="1、图示"><a href="#1、图示" class="headerlink" title="1、图示"></a>1、图示</h4><p><strong>TCP三次握手-四次挥手</strong><br><img src="https://cdn.staticaly.com/gh/muhui00/image-hosting@master/TCP三次握手-四次挥手.6j1wx5gexwo0.webp" alt="TCP三次握手-四次挥手" style="zoom: 80%;" /></p>
+<h4 id="2、重要字段"><a href="#2、重要字段" class="headerlink" title="2、重要字段"></a>2、重要字段</h4><ul>
+<li>seq：（sequence number）序号</li>
+<li>ack：（acknowledgement number）确认号</li>
+<li>标志位：<ul>
+<li>SYN ：(SYNchronization）同步</li>
+<li>ACK ：(ACKnowlegment）确认</li>
+<li>FIN   :（FINish）终止<h4 id="3、三次握手过程"><a href="#3、三次握手过程" class="headerlink" title="3、三次握手过程"></a>3、三次握手过程</h4></li>
+</ul>
+</li>
+</ul>
+<ol>
+<li><p>首先客户端先向服务器端发送一个TCP报文</p>
+<ul>
+<li>标记位为SYN，表示“请求建立新连接”;</li>
+<li>序号为Seq&#x3D;X（X一般为1）（传输信息的时候每个数据包的序号)；</li>
+<li>随后客户端进入SYN-SENT阶段（请求连接的阶段）；</li>
+</ul>
+</li>
+<li><p>服务器端收到来自客户端的TCP报文之后,结束LISTEN阶段。并返回一段报文</p>
+<ul>
+<li>标志位为SYN和ACK，表示“确认客户端的报文Seq序号有效，服务器能正常接收客户端发送的数据，并同意创建新连接”（即告诉客户端，服务器收到了你的数据）；</li>
+<li>序号为Seq&#x3D;y；（返回一个收到信息的数据包 并给其标序号为y）</li>
+<li>确认号为Ack&#x3D;x+1，表示收到客户端的序号Seq并将其值加1作为自己确认号Ack的值（两端配对接收到消息 并反馈的过程；随后服务器端进入SYN-RCVD阶段。</li>
+<li>ACK:代表确认收到消息</li>
+</ul>
+</li>
+<li><p>客户端接收到来自服务器确认收到数据的TCP报文后，明确了从客户端到服务器的数据传输是正常的，结束SYN-SENT阶段，并返回一段TCP报文</p>
+<ul>
+<li>标志位为ACK，表示“确认收到服务器端同意连接的信号”（即告诉服务器，我知道你收到我发的数据了）；</li>
+<li>序号为Seq&#x3D;x+1，表示收到服务器端的确认号Ack，并将其值作为自己的序号值；</li>
+<li>确认号为Ack&#x3D;y+1，表示收到服务器端序号Seq，并将其值加1作为自己的确认号Ack的值；</li>
+<li>随后客户端进入ESTABLISHED阶段。（即成功建立了连接）<h4 id="4、四次挥手过程"><a href="#4、四次挥手过程" class="headerlink" title="4、四次挥手过程"></a>4、四次挥手过程</h4>  由于TCP连接是全双工的，因此，每个方向都必须要单独进行关闭。这一原则是当一方完成数据发送任务后，发送一个FIN来终止这一方向的连接，收到一个FIN只是意味着这一方向上没有数据流动了，即不会再收到数据了。但是在这个TCP连接上仍然能够发送数据，直到另一方向也发送了FIN。首先进行关闭的一方将执行主动关闭，而另一方则执行被动关闭。</li>
+</ul>
+</li>
+<li><p>Client发送一个FIN，以及选择号seq&#x3D;u（表示：u之前的数据已经全部发送，并且数据发到u就可以截止了，就不再有数据了），用来关闭Client到Server的数据传送。Client进入FIN_WAIT_1状态。</p>
+</li>
+<li><p>Server收到FIN后，发送一个请求号seq&#x3D;v和确认序号ack&#x3D;u+1给Client。Server进入CLOSE_WAIT状态。</p>
+</li>
+<li><p>Server发送一个FIN，请求号为最新的seq&#x3D;w和确认序号ack&#x3D;u+1，用来关闭Server到Client的数据传送。Server进入LAST_ACK状态。</p>
+</li>
+<li><p>Client收到FIN后，Client进入TIME_WAIT状态，接着发送一个ACK给Server，确认序号为w+1。Server进入CLOSED状态，完成四次挥手。</p>
+</li>
+</ol>
+<h3 id="TCP滑动窗口"><a href="#TCP滑动窗口" class="headerlink" title="TCP滑动窗口"></a>TCP滑动窗口</h3><h4 id="1、图示-1"><a href="#1、图示-1" class="headerlink" title="1、图示"></a>1、图示</h4><p><img src="https://cdn.staticaly.com/gh/muhui00/image-hosting@master/TCP%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3.1jz2ylthq44g.webp" alt="TCP滑动窗口"></p>
+<h4 id="2、过程"><a href="#2、过程" class="headerlink" title="2、过程"></a>2、过程</h4><ol>
+<li><pre><code>发送端发起连接，声明最大段尺寸是1460，初始序号是0，窗口大小是4K，表示“我的接收缓冲区还有4K字节空闲，你发的数据不要超过4K”。接收端应答连接请求，声明最大段尺寸是1024，初始序号是8000，窗口大小是6K。发送端应答，三方握手结束。
+</code></pre>
+</li>
+<li><pre><code>发送端发出段4-9，每个段带1K的数据，发送端根据窗口大小知道接收端的缓冲区满了，因此停止发送数据。
+</code></pre>
+</li>
+<li><pre><code>接收端的应用程序提走2K数据，接收缓冲区又有了2K空闲，接收端发出段10，在应答已收到6K数据的同时声明窗口大小为2K。
+</code></pre>
+</li>
+<li><pre><code>接收端的应用程序又提走2K数据，接收缓冲区有4K空闲，接收端发出段11，重新声明窗口大小为4K。
+</code></pre>
+</li>
+<li><pre><code>发送端发出段12-13，每个段带2K数据，段13同时还包含FIN位。
+</code></pre>
+</li>
+<li><pre><code>接收端应答接收到的2K数据（6145-8192），再加上FIN位占一个序号8193，因此应答序号是8194，连接处于半关闭状态，接收端同时声明窗口大小为2K。
+</code></pre>
+</li>
+<li><pre><code>接收端的应用程序提走2K数据，接收端重新声明窗口大小为4K。
+</code></pre>
+</li>
+<li><pre><code>接收端的应用程序提走剩下的2K数据，接收缓冲区全空，接收端重新声明窗口大小为6K。
+</code></pre>
+</li>
+<li><pre><code>接收端的应用程序在提走全部数据后，决定关闭连接，发出段17包含FIN位，发送端应答，连接完全关闭。
+</code></pre>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>网络编程</category>
+      </categories>
+      <tags>
+        <tag>TCP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leetcode_day1</title>
+    <url>/2022/09/21/leetcode-day1/</url>
+    <content><![CDATA[<h3 id="题目217-存在重复元素"><a href="#题目217-存在重复元素" class="headerlink" title="题目217. 存在重复元素"></a>题目217. 存在重复元素</h3><p><strong>题目描述：</strong>给你一个整数数组 <code>nums</code> 。如果任一值在数组中出现 <strong>至少两次</strong> ，返回 <code>true</code> ；如果数组中每个元素互不相同，返回 <code>false</code> 。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//暴力排序</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">containsDuplicate</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">sort</span>(nums.<span class="built_in">begin</span>(),nums.<span class="built_in">end</span>());</span><br><span class="line">        <span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n<span class="number">-1</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i]==nums[i+<span class="number">1</span>])</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>借助unordered_set容器来判断是否有重复元素，首先对于数组中每个元素都将它插入到哈希表中。如果下次插入插入元素时发现该元素已经存在于哈希表中，则说明存在重复的元素。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//哈希表set</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">containsDuplicate</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        unordered_set&lt;<span class="type">int</span>&gt; us;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> num: nums)&#123;</span><br><span class="line">            <span class="keyword">if</span>(us.<span class="built_in">find</span>(num) != us.<span class="built_in">end</span>()) <span class="comment">//增强for循环</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            us.<span class="built_in">insert</span>(num);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">containsDuplicate</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        set&lt;<span class="type">int</span>&gt; s;</span><br><span class="line">        <span class="type">int</span> len = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">            <span class="keyword">auto</span> it = s.<span class="built_in">find</span>(nums[i]);</span><br><span class="line">            <span class="keyword">if</span>(it != s.<span class="built_in">end</span>())&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            s.<span class="built_in">insert</span>(nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>用unordered_map容器统计每一个元素出现的次数，然后在遍历整个map容器查看是否有元素出现的次数大于等于2。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//哈希表map</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">containsDuplicate</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.<span class="built_in">size</span>()&lt;=<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        unordered_map&lt;<span class="type">int</span>,<span class="type">int</span>&gt; up;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> num: nums)&#123;</span><br><span class="line">            up[num]++;</span><br><span class="line">            <span class="keyword">if</span>(up[num]&gt;=<span class="number">2</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="题目53-最大子数组和"><a href="#题目53-最大子数组和" class="headerlink" title="题目53 最大子数组和"></a>题目53 最大子数组和</h3><p><strong>题目描述：</strong>给你一个整数数组 <code>nums</code> 。请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和 。<strong>子数组</strong> 是数组中的一个连续部分。<br><strong>思路：动态规划</strong><br>状态方程：<code>dp[i] = max(dp[i-1] + nums[i], nums[i])</code></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> INI_MIN -65535</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 1 暴力枚举(超出时间限制)</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxSubArray</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> max = INI_MIN;</span><br><span class="line">        <span class="type">int</span> len = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i; j &lt; len; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                sum += nums[j];</span><br><span class="line">                <span class="keyword">if</span> (sum &gt; max)</span><br><span class="line">                &#123;</span><br><span class="line">                    max = sum;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 2 动态规划</span></span><br><span class="line">    <span class="comment">//状态方程 dp[i] = max(di[i-1]+nums[i],nums[i])</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxSubArray2</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//类似寻找最大最小值的题目，初始值一定要定义成理论上的最小最大值</span></span><br><span class="line">        <span class="type">int</span> result = INI_MIN;</span><br><span class="line">        <span class="type">int</span> len = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="comment">// dp[i]表示nums中以nums[i]结尾的最大子序和</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(len)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">        result = dp[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; len; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>] + nums[i], nums[i]);</span><br><span class="line">            result = <span class="built_in">max</span>(result, dp[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//分治法（还没学会）</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>leetcode_day2</title>
     <url>/2022/10/17/leetcode-day2/</url>
     <content><![CDATA[<h3 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1 两数之和"></a>1 两数之和</h3><p><strong>题目描述</strong><br>    给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那两个整数，并返回它们的数组下标。</p>
@@ -462,20 +462,6 @@
       </tags>
   </entry>
   <entry>
-    <title>leetcode_day6</title>
-    <url>/2022/10/22/leetcode-day6/</url>
-    <content><![CDATA[<h3 id="合并两个有序列表"><a href="#合并两个有序列表" class="headerlink" title="合并两个有序列表"></a>合并两个有序列表</h3><p><strong>题目描述</strong><br>    将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。<br><img src="https://cdn.staticaly.com/gh/muhui00/image-hosting@master/image.3yzwt9tjmew0.webp" alt="image"></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @lc app=leetcode.cn id=21 lang=cpp</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * [21] 合并两个有序链表</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// @lc code=start</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">ListNode</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> val;</span><br><span class="line">    ListNode *next;</span><br><span class="line">    <span class="built_in">ListNode</span>() : <span class="built_in">val</span>(<span class="number">0</span>), <span class="built_in">next</span>(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">    <span class="built_in">ListNode</span>(<span class="type">int</span> x) : <span class="built_in">val</span>(x), <span class="built_in">next</span>(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">    <span class="built_in">ListNode</span>(<span class="type">int</span> x, ListNode *next) : <span class="built_in">val</span>(x), <span class="built_in">next</span>(next) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">//迭代</span></span><br><span class="line">    <span class="function">ListNode *<span class="title">mergeTwoLists</span><span class="params">(ListNode *list1, ListNode *list2)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (list1 == <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> list2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (list2 == <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> list1;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode *preHead = <span class="keyword">new</span> <span class="built_in">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">        ListNode *prev = preHead;</span><br><span class="line">        <span class="keyword">while</span> (list1 != <span class="literal">nullptr</span> &amp;&amp; list2 != <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (list1-&gt;val &lt; list2-&gt;val)</span><br><span class="line">            &#123;</span><br><span class="line">                prev-&gt;next = list1;</span><br><span class="line">                list1 = list1-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                prev-&gt;next = list2;</span><br><span class="line">                list2 = list2-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            prev = prev-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        prev-&gt;next = list1 == <span class="literal">nullptr</span> ? list2 : list1;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> preHead-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//递归</span></span><br><span class="line">    <span class="function">ListNode *<span class="title">mergeTwoLists2</span><span class="params">(ListNode *list1, ListNode *list2)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">    	<span class="comment">//边界条件</span></span><br><span class="line">        <span class="keyword">if</span> (list1 == <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> list2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (list2 == <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> list1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//递归调用</span></span><br><span class="line">        <span class="keyword">if</span> (list1-&gt;val &lt;= list2-&gt;val)</span><br><span class="line">        &#123;</span><br><span class="line">            list1-&gt;next = <span class="built_in">mergeTwoLists2</span>(list1-&gt;next, list2);</span><br><span class="line">            <span class="keyword">return</span> list1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            list2-&gt;next = <span class="built_in">mergeTwoLists2</span>(list1, list2-&gt;next);</span><br><span class="line">            <span class="keyword">return</span> list2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// @lc code=end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.staticaly.com/gh/muhui00/image-hosting@master/31978222bda8518a6afb3c0871ac306.6c383qrdob40.webp" alt="31978222bda8518a6afb3c0871ac306"></p>
-]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>递归</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>leetcode_day5</title>
     <url>/2022/10/21/leetcode-day5/</url>
     <content><![CDATA[<h3 id="矩阵置零"><a href="#矩阵置零" class="headerlink" title="矩阵置零"></a>矩阵置零</h3><p><strong>题目描述</strong><br>    给定一个 m x n 的矩阵，如果一个元素为 0 ，则将其所在行和列的所有元素都设为 0 。请使用原地算法。</p>
@@ -488,6 +474,20 @@
       </categories>
       <tags>
         <tag>矩阵置零</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leetcode_day6</title>
+    <url>/2022/10/22/leetcode-day6/</url>
+    <content><![CDATA[<h3 id="合并两个有序列表"><a href="#合并两个有序列表" class="headerlink" title="合并两个有序列表"></a>合并两个有序列表</h3><p><strong>题目描述</strong><br>    将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。<br><img src="https://cdn.staticaly.com/gh/muhui00/image-hosting@master/image.3yzwt9tjmew0.webp" alt="image"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @lc app=leetcode.cn id=21 lang=cpp</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * [21] 合并两个有序链表</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// @lc code=start</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">ListNode</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> val;</span><br><span class="line">    ListNode *next;</span><br><span class="line">    <span class="built_in">ListNode</span>() : <span class="built_in">val</span>(<span class="number">0</span>), <span class="built_in">next</span>(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">    <span class="built_in">ListNode</span>(<span class="type">int</span> x) : <span class="built_in">val</span>(x), <span class="built_in">next</span>(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">    <span class="built_in">ListNode</span>(<span class="type">int</span> x, ListNode *next) : <span class="built_in">val</span>(x), <span class="built_in">next</span>(next) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">//迭代</span></span><br><span class="line">    <span class="function">ListNode *<span class="title">mergeTwoLists</span><span class="params">(ListNode *list1, ListNode *list2)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (list1 == <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> list2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (list2 == <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> list1;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode *preHead = <span class="keyword">new</span> <span class="built_in">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">        ListNode *prev = preHead;</span><br><span class="line">        <span class="keyword">while</span> (list1 != <span class="literal">nullptr</span> &amp;&amp; list2 != <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (list1-&gt;val &lt; list2-&gt;val)</span><br><span class="line">            &#123;</span><br><span class="line">                prev-&gt;next = list1;</span><br><span class="line">                list1 = list1-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                prev-&gt;next = list2;</span><br><span class="line">                list2 = list2-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            prev = prev-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        prev-&gt;next = list1 == <span class="literal">nullptr</span> ? list2 : list1;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> preHead-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//递归</span></span><br><span class="line">    <span class="function">ListNode *<span class="title">mergeTwoLists2</span><span class="params">(ListNode *list1, ListNode *list2)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">    	<span class="comment">//边界条件</span></span><br><span class="line">        <span class="keyword">if</span> (list1 == <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> list2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (list2 == <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> list1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//递归调用</span></span><br><span class="line">        <span class="keyword">if</span> (list1-&gt;val &lt;= list2-&gt;val)</span><br><span class="line">        &#123;</span><br><span class="line">            list1-&gt;next = <span class="built_in">mergeTwoLists2</span>(list1-&gt;next, list2);</span><br><span class="line">            <span class="keyword">return</span> list1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            list2-&gt;next = <span class="built_in">mergeTwoLists2</span>(list1, list2-&gt;next);</span><br><span class="line">            <span class="keyword">return</span> list2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// @lc code=end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.staticaly.com/gh/muhui00/image-hosting@master/31978222bda8518a6afb3c0871ac306.6c383qrdob40.webp" alt="31978222bda8518a6afb3c0871ac306"></p>
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>递归</tag>
       </tags>
   </entry>
   <entry>
@@ -519,17 +519,6 @@
       </tags>
   </entry>
   <entry>
-    <title>leetcode_day8</title>
-    <url>/2022/10/26/leetcode-day8/</url>
-    <content><![CDATA[<h3 id="二叉树的后序遍历（迭代写法）"><a href="#二叉树的后序遍历（迭代写法）" class="headerlink" title="二叉树的后序遍历（迭代写法）"></a>二叉树的后序遍历（迭代写法）</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @lc app=leetcode.cn id=145 lang=cpp</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * [145] 二叉树的后序遍历</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// @lc code=start</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">TreeNode</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> val;</span><br><span class="line">    TreeNode *left;</span><br><span class="line">    TreeNode *right;</span><br><span class="line">    <span class="built_in">TreeNode</span>() : <span class="built_in">val</span>(<span class="number">0</span>), <span class="built_in">left</span>(<span class="literal">nullptr</span>), <span class="built_in">right</span>(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">    <span class="built_in">TreeNode</span>(<span class="type">int</span> x) : <span class="built_in">val</span>(x), <span class="built_in">left</span>(<span class="literal">nullptr</span>), <span class="built_in">right</span>(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">    <span class="built_in">TreeNode</span>(<span class="type">int</span> x, TreeNode *left, TreeNode *right) : <span class="built_in">val</span>(x), <span class="built_in">left</span>(left), <span class="built_in">right</span>(right) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//迭代</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">postorder</span><span class="params">(TreeNode *root, vector&lt;<span class="type">int</span>&gt; &amp;res)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">        stack&lt;TreeNode *&gt; stk;</span><br><span class="line">        <span class="comment">//记录历史访问节点</span></span><br><span class="line">        TreeNode *prev = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">while</span> (!stk.<span class="built_in">empty</span>() || root != <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span> (root != <span class="literal">nullptr</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                stk.<span class="built_in">emplace</span>(root);</span><br><span class="line">                root = root-&gt;left;</span><br><span class="line">            &#125;</span><br><span class="line">            root = stk.<span class="built_in">top</span>();</span><br><span class="line">            stk.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="keyword">if</span> (root-&gt;right == <span class="literal">nullptr</span> || root-&gt;right == prev)</span><br><span class="line">            &#123;</span><br><span class="line">                res.<span class="built_in">emplace_back</span>(root-&gt;val);</span><br><span class="line">                prev = root;</span><br><span class="line">                root = <span class="literal">nullptr</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                stk.<span class="built_in">emplace</span>(root);</span><br><span class="line">                root = root-&gt;right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// @lc code=end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>leetcode</category>
-      </categories>
-      <tags>
-        <tag>二叉树</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>leetcode_day7</title>
     <url>/2022/10/25/leetcode-day7/</url>
     <content><![CDATA[<h3 id="有效的括号"><a href="#有效的括号" class="headerlink" title="有效的括号"></a>有效的括号</h3><p><strong>题目描述</strong><br>给定一个只包括 <code>(&#39;，&#39;)</code>，<code>&#123;&#39;，&#39;&#125;</code>，<code>[&#39;，&#39;]</code> 的字符串 s ，判断字符串是否有效。</p>
@@ -552,6 +541,17 @@
       </tags>
   </entry>
   <entry>
+    <title>leetcode_day8</title>
+    <url>/2022/10/26/leetcode-day8/</url>
+    <content><![CDATA[<h3 id="二叉树的后序遍历（迭代写法）"><a href="#二叉树的后序遍历（迭代写法）" class="headerlink" title="二叉树的后序遍历（迭代写法）"></a>二叉树的后序遍历（迭代写法）</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @lc app=leetcode.cn id=145 lang=cpp</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * [145] 二叉树的后序遍历</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// @lc code=start</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">TreeNode</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> val;</span><br><span class="line">    TreeNode *left;</span><br><span class="line">    TreeNode *right;</span><br><span class="line">    <span class="built_in">TreeNode</span>() : <span class="built_in">val</span>(<span class="number">0</span>), <span class="built_in">left</span>(<span class="literal">nullptr</span>), <span class="built_in">right</span>(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">    <span class="built_in">TreeNode</span>(<span class="type">int</span> x) : <span class="built_in">val</span>(x), <span class="built_in">left</span>(<span class="literal">nullptr</span>), <span class="built_in">right</span>(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">    <span class="built_in">TreeNode</span>(<span class="type">int</span> x, TreeNode *left, TreeNode *right) : <span class="built_in">val</span>(x), <span class="built_in">left</span>(left), <span class="built_in">right</span>(right) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//迭代</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">postorder</span><span class="params">(TreeNode *root, vector&lt;<span class="type">int</span>&gt; &amp;res)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">        stack&lt;TreeNode *&gt; stk;</span><br><span class="line">        <span class="comment">//记录历史访问节点</span></span><br><span class="line">        TreeNode *prev = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">while</span> (!stk.<span class="built_in">empty</span>() || root != <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span> (root != <span class="literal">nullptr</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                stk.<span class="built_in">emplace</span>(root);</span><br><span class="line">                root = root-&gt;left;</span><br><span class="line">            &#125;</span><br><span class="line">            root = stk.<span class="built_in">top</span>();</span><br><span class="line">            stk.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="keyword">if</span> (root-&gt;right == <span class="literal">nullptr</span> || root-&gt;right == prev)</span><br><span class="line">            &#123;</span><br><span class="line">                res.<span class="built_in">emplace_back</span>(root-&gt;val);</span><br><span class="line">                prev = root;</span><br><span class="line">                root = <span class="literal">nullptr</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                stk.<span class="built_in">emplace</span>(root);</span><br><span class="line">                root = root-&gt;right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// @lc code=end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>二叉树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>一个简单的list实现</title>
     <url>/2022/11/02/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84list%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<p><strong>功能：</strong>将数据进行链式存储。</p>
@@ -570,18 +570,6 @@
       </categories>
       <tags>
         <tag>list</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>有关fd泄露的调试方法</title>
-    <url>/2022/11/01/%E6%9C%89%E5%85%B3fd%E6%B3%84%E9%9C%B2%E7%9A%84%E8%B0%83%E8%AF%95%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<h3 id="有关fd泄露的调试方法"><a href="#有关fd泄露的调试方法" class="headerlink" title="有关fd泄露的调试方法"></a>有关fd泄露的调试方法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看全部进程</span></span><br><span class="line">ps aux</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看name进程</span></span><br><span class="line">ps aux | grep &quot;name&quot;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看name进程（忽略grep命令本身）</span></span><br><span class="line">ps aux | grep &quot;name&quot; | grep -v &quot;grep&quot;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">得到当前进程号（可以后台一直执行该命令，并将该进程的进程号放在一个管理表中管理，监控其是否消失，消失则重启该进程--》看门狗）</span></span><br><span class="line">ps aux | grep &quot;name&quot; | grep -v &quot;grep&quot; | awk &#x27;&#123;print $2&#125;&#x27;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">该目录存放当前系统正在运行的进程</span></span><br><span class="line">cd /proc/</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">进入某个进程目录，此目录存放着该进程所有的状态</span></span><br><span class="line">cd 1</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">此目录存放该进程所打开的文件描述符</span></span><br><span class="line">cd fd</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看文件描述符</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">可以通过监控某个进程的文件描述符是否有异常增长来调试fd的泄露情况</span></span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.staticaly.com/gh/muhui00/image-hosting@master/proc.5hizkvtmu140.webp" alt="proc"></p>
-]]></content>
-      <tags>
-        <tag>linux调试</tag>
       </tags>
   </entry>
   <entry>
@@ -655,6 +643,42 @@
       </categories>
       <tags>
         <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>复制带随机指针的链表</title>
+    <url>/2022/11/03/%E5%A4%8D%E5%88%B6%E5%B8%A6%E9%9A%8F%E6%9C%BA%E6%8C%87%E9%92%88%E7%9A%84%E9%93%BE%E8%A1%A8/</url>
+    <content><![CDATA[<p><strong>题目描述</strong><br>给你一个长度为 <code>n</code> 的链表，每个节点包含一个额外增加的随机指针 <code>random</code> ，该指针可以指向链表中的任何节点或空节点。</p>
+<p><strong>示例</strong><br><img src="https://cdn.staticaly.com/gh/muhui00/image-hosting@master/%E5%A4%8D%E5%88%B6%E5%B8%A6%E9%9A%8F%E6%9C%BA%E6%8C%87%E9%92%88%E7%9A%84%E9%93%BE%E8%A1%A8.3s3afofhj5e0.webp" alt="复制带随机指针的链表"></p>
+<p><strong>思路</strong></p>
+<ul>
+<li>哈希表<ul>
+<li>创建一个哈希表，再遍历原链表，遍历的同时再不断创建新节点（key–&gt;oldnode，value–&gt;newnode）</li>
+<li>再次遍历原链表，设置新链表的next和random指针</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://cdn.staticaly.com/gh/muhui00/image-hosting@master/%E9%93%BE%E8%A1%A8%E5%93%88%E5%B8%8C%E5%AD%98%E5%82%A8.6ssn5nv4zmo0.webp" alt="链表哈希存储"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @lc app=leetcode.cn id=138 lang=cpp</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * [138] 复制带随机指针的链表</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// @lc code=start</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">// Definition for a Node.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Node</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> val;</span><br><span class="line">    Node *next;</span><br><span class="line">    Node *random;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Node</span>(<span class="type">int</span> _val)</span><br><span class="line">    &#123;</span><br><span class="line">        val = _val;</span><br><span class="line">        next = <span class="literal">NULL</span>;</span><br><span class="line">        random = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//哈希表</span></span><br><span class="line">    <span class="function">Node *<span class="title">copyRandomList</span><span class="params">(Node *head)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// key--&gt;old node, value--&gt;new node</span></span><br><span class="line">        unordered_map&lt;Node *, Node *&gt; map;</span><br><span class="line">        Node *p = head;</span><br><span class="line">        <span class="comment">//将原节点和新节点放入map</span></span><br><span class="line">        <span class="keyword">while</span> (p != <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            Node *newnode = <span class="keyword">new</span> <span class="built_in">Node</span>(p-&gt;val);</span><br><span class="line">            map[p] = newnode;</span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//遍历单链表， 设置新节点的next和random</span></span><br><span class="line">        p = head;</span><br><span class="line">        <span class="keyword">while</span> (p != <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            Node *newNode = map.<span class="built_in">at</span>(p);</span><br><span class="line">            <span class="comment">//设置next</span></span><br><span class="line">            <span class="keyword">if</span> (p-&gt;next != <span class="literal">nullptr</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                newNode-&gt;next = map.<span class="built_in">at</span>(p-&gt;next);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//设置random</span></span><br><span class="line">            <span class="keyword">if</span> (p-&gt;random != <span class="literal">nullptr</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                newNode-&gt;random = map.<span class="built_in">at</span>(p-&gt;random);</span><br><span class="line">            &#125;</span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> map.<span class="built_in">at</span>(head);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//迭代</span></span><br><span class="line">    <span class="function">Node *<span class="title">copyRandomList2</span><span class="params">(Node *head)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Node *p = head;</span><br><span class="line">        <span class="comment">//在每个原节点的后面插入一个新节点</span></span><br><span class="line">        <span class="keyword">while</span> (p != <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            Node *newNode = <span class="keyword">new</span> <span class="built_in">Node</span>(p-&gt;val);</span><br><span class="line">            newNode-&gt;next = p-&gt;next;</span><br><span class="line">            p-&gt;next = newNode;</span><br><span class="line">            p = newNode-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        p = head;</span><br><span class="line">        <span class="comment">//设置新节点的随机节点</span></span><br><span class="line">        <span class="keyword">while</span> (p != <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (p-&gt;random != <span class="literal">nullptr</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                p-&gt;next-&gt;random = p-&gt;random-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            p = p-&gt;next-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Node *newhead = <span class="keyword">new</span> <span class="built_in">Node</span>(<span class="number">-1</span>);</span><br><span class="line">        p = head;</span><br><span class="line">        Node *node = newhead;</span><br><span class="line">        <span class="comment">//分离两个新链表</span></span><br><span class="line">        <span class="keyword">while</span> (p != <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            node-&gt;next = p-&gt;next;</span><br><span class="line">            node = node-&gt;next;</span><br><span class="line">            p-&gt;next = node-&gt;next;</span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> newhead-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// @lc code=end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>有关fd泄露的调试方法</title>
+    <url>/2022/11/01/%E6%9C%89%E5%85%B3fd%E6%B3%84%E9%9C%B2%E7%9A%84%E8%B0%83%E8%AF%95%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h3 id="有关fd泄露的调试方法"><a href="#有关fd泄露的调试方法" class="headerlink" title="有关fd泄露的调试方法"></a>有关fd泄露的调试方法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看全部进程</span></span><br><span class="line">ps aux</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看name进程</span></span><br><span class="line">ps aux | grep &quot;name&quot;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看name进程（忽略grep命令本身）</span></span><br><span class="line">ps aux | grep &quot;name&quot; | grep -v &quot;grep&quot;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">得到当前进程号（可以后台一直执行该命令，并将该进程的进程号放在一个管理表中管理，监控其是否消失，消失则重启该进程--》看门狗）</span></span><br><span class="line">ps aux | grep &quot;name&quot; | grep -v &quot;grep&quot; | awk &#x27;&#123;print $2&#125;&#x27;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">该目录存放当前系统正在运行的进程</span></span><br><span class="line">cd /proc/</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">进入某个进程目录，此目录存放着该进程所有的状态</span></span><br><span class="line">cd 1</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">此目录存放该进程所打开的文件描述符</span></span><br><span class="line">cd fd</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看文件描述符</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">可以通过监控某个进程的文件描述符是否有异常增长来调试fd的泄露情况</span></span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
+<p><img src="https://cdn.staticaly.com/gh/muhui00/image-hosting@master/proc.5hizkvtmu140.webp" alt="proc"></p>
+]]></content>
+      <tags>
+        <tag>linux调试</tag>
       </tags>
   </entry>
 </search>
