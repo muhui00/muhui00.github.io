@@ -9,7 +9,7 @@
     
     <title>
         
-            智能指针-shared_ptr |
+            关于dynamic_cast和typename |
         
         muhui&#39;s blog
     </title>
@@ -169,7 +169,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">智能指针-shared_ptr</span>
+            <span class="title-hover-animation">关于dynamic_cast和typename</span>
         </div>
 
         
@@ -188,8 +188,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-11-05 22:27:56</span>
-        <span class="mobile">2022-11-05 22:27</span>
+        <span class="pc">2022-11-06 22:54:38</span>
+        <span class="mobile">2022-11-06 22:54</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -197,7 +197,7 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/">智能指针</a>&nbsp;
+                        <a href="/categories/C-11/">C++11</a>&nbsp;
                     </li>
                 
             </ul>
@@ -209,7 +209,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/shared-ptr/">shared_ptr</a>&nbsp;
+                        <a href="/tags/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/">日常学习</a>&nbsp;
                     </li>
                 
             </ul>
@@ -219,12 +219,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>994 Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>588 Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>3 Mins</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>2 Mins</span>
         </span>
     
     
@@ -240,66 +240,21 @@
         
 
         <div class="article-content markdown-body">
-            <h3 id="1、关于RALL机制-Resource-Acquisition-Is-Initialization"><a href="#1、关于RALL机制-Resource-Acquisition-Is-Initialization" class="headerlink" title="1、关于RALL机制(Resource Acquisition Is Initialization)"></a>1、关于RALL机制(Resource Acquisition Is Initialization)</h3><p>RAII 意为“资源获取即初始化”。其核心是把资源和对象的生命周期绑定，对象创建获取资源，对象销毁释放资源。在 RAII 的指导下，C++ 把底层的资源管理问题提升到了对象生命周期管理的更高层次。<br>使用C++时，让人头疼的时内存管理，使用RALL机制可以实现资源的自动释放，我们可以将资源托管给某个对象，或者说这个对象是资源的代理，在这个对象析构的时候完成资源的释放。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>  </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span>  </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//创建一个模板类, 负责资源的释放, 当资源生命周期结束, 自动释放资源;</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;  </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">auto_release_ptr</span>  </span><br><span class="line">&#123;  </span><br><span class="line"><span class="keyword">public</span>:  </span><br><span class="line">    <span class="built_in">auto_release_ptr</span>(T *t) :<span class="type">_t</span>(t)&#123;&#125;;  </span><br><span class="line">    ~<span class="built_in">auto_release_ptr</span>()  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">delete</span> <span class="type">_t</span>;  </span><br><span class="line">    &#125;;  </span><br><span class="line"></span><br><span class="line">    <span class="function">T * <span class="title">getPtr</span><span class="params">()</span>  </span></span><br><span class="line"><span class="function">    </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> <span class="type">_t</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:  </span><br><span class="line">    T *<span class="type">_t</span>;  </span><br><span class="line">&#125;;  </span><br></pre></td></tr></table></figure>
+            <h4 id="typename说明"><a href="#typename说明" class="headerlink" title="typename说明"></a>typename说明</h4><p>  <code>typename</code>是一个C++程序设计语言中的关键字。当用于泛型编程时是另一术语”class”的同义词。这个关键字用于指出模板声明（或定义）中的非独立名称（dependent names）是类型名，而非变量名。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="comment">//typename 指出模板声明（或定义）中的非独立名称是类型名，而非变量名</span></span><br><span class="line"><span class="comment">//Lookup是一个返回类型为ConfigVar&lt;T&gt;::ptr 的静态成员函数</span></span><br><span class="line"><span class="type">static</span> <span class="keyword">typename</span> ConfigVar&lt;T&gt;::<span class="function">ptr <span class="title">Lookup</span><span class="params">(<span class="type">const</span> std::string&amp; name,</span></span></span><br><span class="line"><span class="params"><span class="function">                <span class="type">const</span> T&amp; default_val, <span class="type">const</span> std::string&amp; description = <span class="string">&quot;&quot;</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//查找name是否在map内</span></span><br><span class="line">    <span class="keyword">auto</span> tmp = <span class="built_in">Lookup</span>&lt;T&gt;(name);</span><br><span class="line">    <span class="keyword">if</span>(tmp)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//存在，记录信息，返回tmp</span></span><br><span class="line">        <span class="built_in">MUHUI_LOG_INFO</span>(<span class="built_in">MUHUI_LOG_ROOT</span>()) &lt;&lt; <span class="string">&quot;Lookup name  = &quot;</span> &lt;&lt; name &lt;&lt; <span class="string">&quot; exists&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//不存在，先查询name是否存在非法字符</span></span><br><span class="line">    <span class="keyword">if</span>(name.<span class="built_in">find_first_not_of</span>(<span class="string">&quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ._0123456789&quot;</span>)</span><br><span class="line">            != std::string::npos)&#123;</span><br><span class="line">        <span class="comment">//name存在非法字符，记录错误信息，抛出异常</span></span><br><span class="line">        <span class="built_in">MUHUI_LOG_ERROR</span>(<span class="built_in">MUHUI_LOG_ROOT</span>()) &lt;&lt; <span class="string">&quot;Lookup name invalid &quot;</span> &lt;&lt; name;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">invalid_argument</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//新建ConfigVar对象指针，并将其加入到map中</span></span><br><span class="line">    <span class="keyword">typename</span> ConfigVar&lt;T&gt;::<span class="function">ptr <span class="title">v</span><span class="params">(<span class="keyword">new</span> ConfigVar&lt;T&gt;(name, default_val, description))</span></span>;</span><br><span class="line">    s_datas[name] = v;</span><br><span class="line">    <span class="keyword">return</span> v;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="2、关于shared-ptr智能指针"><a href="#2、关于shared-ptr智能指针" class="headerlink" title="2、关于shared_ptr智能指针"></a>2、关于<code>shared_ptr</code>智能指针</h3><p>多个 <code>shared_ptr</code> 智能指针可以共同使用同一块堆内存。并且，由于该类型智能指针在实现上采用的是引用计数机制，即便有一个 <code>shared_ptr</code> 指针放弃了堆内存的“使用权”（引用计数减 1），也不会影响其他指向同一堆内存的 <code>shared_ptr</code> 指针（只有引用计数为 0 时，堆内存才会被自动释放）。</p>
-<h4 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h4><ul>
-<li>构造空智能指针<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">std::shared_ptr&lt;<span class="type">int</span>&gt; p1;             <span class="comment">//不传入任何实参</span></span><br><span class="line"><span class="function">std::shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">p2</span><span class="params">(<span class="literal">nullptr</span>)</span></span>;    <span class="comment">//传入空指针 nullptr</span></span><br></pre></td></tr></table></figure></li>
-<li>构造时明确指针指向<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">p3</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">10</span>))</span></span>;</span><br></pre></td></tr></table></figure></li>
-<li>使用 <code>std::make_shared&lt;T&gt;</code> 初始化指针<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::shared_ptr&lt;<span class="type">int</span>&gt; p3 = std::<span class="built_in">make_shared</span>&lt;<span class="type">int</span>&gt;(<span class="number">10</span>);</span><br></pre></td></tr></table></figure></li>
-<li>关于 <code>shared_ptr</code> 的拷贝&#x2F;移动构造函数<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//调用拷贝构造函数</span></span><br><span class="line"><span class="comment">// p3 是左值</span></span><br><span class="line"><span class="comment">//std::shared_ptr&lt;int&gt; p4 = p3;</span></span><br><span class="line"><span class="function">std::shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">p4</span><span class="params">(p3)</span></span>;</span><br><span class="line"><span class="comment">//调用移动构造函数</span></span><br><span class="line"><span class="comment">//std::shared_ptr&lt;int&gt; p5 = std::move(p4);</span></span><br><span class="line"><span class="function">std::shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">p5</span><span class="params">(std::move(p4))</span></span>; </span><br></pre></td></tr></table></figure>
-对于 <code>std::move(p4)</code> 来说，该函数会强制将 <code>p4</code> 转换成对应的右值，因此初始化 <code>p5</code> 调用的是移动构造函数。另外和调用拷贝构造函数不同，用 <code>std::move(p4)</code> 初始化 <code>p5</code>，会使得 <code>p5</code> 拥有了 <code>p4</code> 的堆内存，而 <code>p4</code> 则变成了空智能指针</li>
+<h4 id="关于C-中的dynamic-cast和dynamic-pointer-cast"><a href="#关于C-中的dynamic-cast和dynamic-pointer-cast" class="headerlink" title="关于C++中的dynamic_cast和dynamic_pointer_cast"></a>关于C++中的<code>dynamic_cast</code>和<code>dynamic_pointer_cast</code></h4><ul>
+<li>将一个基类对象指针（或引用）<code>cast</code>到继承类指针，<code>dynamic_cast</code>会根据基类指针是否真正指向继承类指针来做相应处理。</li>
+<li>主要用途：将基类的指针或引用安全地转换成派生类的指针或引用，并用派生类的指针或引用调用非虚函数。如果是基类指针或引用调用的是虚函数无需转换就能在运行时调用派生类的虚函数。</li>
 </ul>
-<p>**注意 : **同一普通指针不能同时为多个 <code>shared_ptr</code> 对象赋值，否则会导致程序发生异常。</p>
-<ul>
-<li>在初始化 <code>shared_ptr</code> 智能指针时，可以自定义所指堆内存的释放规则，这样当堆内存的引用计数为 0 时，会优先调用我们自定义的释放规则。</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用lambda表达式</span></span><br><span class="line"><span class="function">std::shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">p7</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>[<span class="number">10</span>], [](<span class="type">int</span>* p) &#123;<span class="keyword">delete</span>[]p; &#125;)</span></span>;</span><br></pre></td></tr></table></figure>
-<h4 id="shared-ptr-lt-T-gt-模板类提供的成员方法"><a href="#shared-ptr-lt-T-gt-模板类提供的成员方法" class="headerlink" title="shared_ptr&lt;T&gt;模板类提供的成员方法"></a><code>shared_ptr&lt;T&gt;</code>模板类提供的成员方法</h4><table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>swap()</code></td>
-<td>交换 2 个相同类型 <code>shared_ptr</code> 智能指针的内容。</td>
-</tr>
-<tr>
-<td><code>reset()</code></td>
-<td>当函数没有实参时，该函数会使当前 <code>shared_ptr</code> 所指堆内存的引用计数减 1，同时将当前对象重置为一个空指针；当为函数传递一个新申请的堆内存时，则调用该函数的 <code>shared_ptr</code> 对象会获得该存储空间的所有权，并且引用计数的初始值为 1。</td>
-</tr>
-<tr>
-<td><code>get()</code></td>
-<td>获得 <code>shared_ptr</code> 对象内部包含的普通指针。</td>
-</tr>
-<tr>
-<td><code>use_count()</code></td>
-<td>返回同当前 <code>shared_ptr</code> 对象（包括它）指向相同的所有 <code>shared_ptr</code> 对象的数量。</td>
-</tr>
-<tr>
-<td><code>unique()</code></td>
-<td>判断当前 <code>shared_ptr</code> 对象指向的堆内存，是否不再有其它 <code>shared_ptr</code> 对象再指向它。</td>
-</tr>
-<tr>
-<td><code>operator bool()</code></td>
-<td>判断当前 <code>shared_ptr</code> 对象是否为空智能指针，如果是空指针，返回 <code>false</code>；反之，返回 true。</td>
-</tr>
-<tr>
-<td><code>operator=()</code></td>
-<td>重载赋值号，使得同一类型的 <code>shared_ptr</code> 智能指针可以相互赋值。</td>
-</tr>
-<tr>
-<td><code>operator*()</code></td>
-<td>重载 <code>*</code> 号，获取当前 <code>shared_ptr</code> 智能指针对象指向的数据。</td>
-</tr>
-<tr>
-<td><code>operator-&gt;()</code></td>
-<td>重载 <code>-&gt;</code> 号，当智能指针指向的数据类型为自定义的结构体时，通过 -&gt; 运算符可以获取其内部的指定成员。</td>
-</tr>
-</tbody></table>
+<h5 id="转换方式"><a href="#转换方式" class="headerlink" title="转换方式"></a>转换方式</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//type必须是一个类类型且必须是一个有效的指针 </span></span><br><span class="line"><span class="built_in">dynamic_cast</span>&lt; type* &gt;(e) </span><br><span class="line"><span class="comment">//type必须是一个类类型且必须是一个左值 </span></span><br><span class="line"><span class="built_in">dynamic_cast</span>&lt; type&amp; &gt;(e) </span><br><span class="line"><span class="comment">//type必须是一个类类型且必须是一个右值</span></span><br><span class="line"><span class="built_in">dynamic_cast</span>&lt; type&amp;&amp; &gt;(e) </span><br></pre></td></tr></table></figure>
+
+<p>e的类型必须符合以下三个条件中的任何一个： </p>
+<ol>
+<li>e的类型是目标类型type的公有派生类 </li>
+<li>e的类型是目标type的共有基类 </li>
+<li>e的类型就是目标type的类型<h5 id="dynamic-pointer-cast"><a href="#dynamic-pointer-cast" class="headerlink" title="dynamic_pointer_cast"></a><code>dynamic_pointer_cast</code></h5><code>dynamic_pointer_cast</code>与<code>dynamic_cast</code>用法类似，当指针是智能指针时候，向下转换，用<code>dynamic_Cast</code> 则编译不能通过，此时需要使用<code>dynamic_pointer_cast</code>。</li>
+</ol>
 
         </div>
 
@@ -307,11 +262,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>Post title：智能指针-shared_ptr</li>
+        <li>Post title：关于dynamic_cast和typename</li>
         <li>Post author：muhui</li>
-        <li>Create time：2022-11-05 22:27:56</li>
+        <li>Create time：2022-11-06 22:54:38</li>
         <li>
-            Post link：https://muhui00.github.io/2022/11/05/智能指针-shared-ptr/
+            Post link：https://muhui00.github.io/2022/11/06/关于dynamic-cast和typename/
         </li>
         <li>
             Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
@@ -326,7 +281,7 @@
             <ul class="post-tags-box">
                 
                     <li class="tag-item">
-                        <a href="/tags/shared-ptr/">#shared_ptr</a>&nbsp;
+                        <a href="/tags/%E6%97%A5%E5%B8%B8%E5%AD%A6%E4%B9%A0/">#日常学习</a>&nbsp;
                     </li>
                 
             </ul>
@@ -338,13 +293,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2022/11/06/boost-lexical-cast-hpp%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"
+                           href="/2022/11/06/%E5%85%B3%E4%BA%8EC-%E5%AD%90%E7%B1%BB%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%88%9D%E5%A7%8B%E5%8C%96%E5%8F%8A%E7%88%B6%E7%B1%BB%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%88%9D%E5%A7%8B%E5%8C%96/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">boost/lexical_cast.hpp的简单使用方法</span>
+                                <span class="post-nav-title-item">关于C++子类构造函数初始化及父类构造函数初始化</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
                         </a>
@@ -354,10 +309,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/11/03/%E5%A4%8D%E5%88%B6%E5%B8%A6%E9%9A%8F%E6%9C%BA%E6%8C%87%E9%92%88%E7%9A%84%E9%93%BE%E8%A1%A8/"
+                           href="/2022/11/06/boost-lexical-cast-hpp%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">复制带随机指针的链表</span>
+                                <span class="post-nav-title-item">boost/lexical_cast.hpp的简单使用方法</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -562,7 +517,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%85%B3%E4%BA%8ERALL%E6%9C%BA%E5%88%B6-Resource-Acquisition-Is-Initialization"><span class="nav-text">1、关于RALL机制(Resource Acquisition Is Initialization)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%85%B3%E4%BA%8Eshared-ptr%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88"><span class="nav-text">2、关于shared_ptr智能指针</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA"><span class="nav-text">创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#shared-ptr-lt-T-gt-%E6%A8%A1%E6%9D%BF%E7%B1%BB%E6%8F%90%E4%BE%9B%E7%9A%84%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95"><span class="nav-text">shared_ptr&lt;T&gt;模板类提供的成员方法</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#typename%E8%AF%B4%E6%98%8E"><span class="nav-text">typename说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EC-%E4%B8%AD%E7%9A%84dynamic-cast%E5%92%8Cdynamic-pointer-cast"><span class="nav-text">关于C++中的dynamic_cast和dynamic_pointer_cast</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2%E6%96%B9%E5%BC%8F"><span class="nav-text">转换方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#dynamic-pointer-cast"><span class="nav-text">dynamic_pointer_cast</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
